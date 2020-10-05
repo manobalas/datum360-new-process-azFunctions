@@ -23,54 +23,47 @@ module.exports = async function (context, req) {
         return reqprom.get(options)
     }
 
-    var dir = './generated';
-    if (!fs.existsSync(dir)) {
-        fs.mkdirSync(dir);
-    }
+    // var dir = './generated';
+    // if (!fs.existsSync(dir)) {
+    //     fs.mkdirSync(dir);
+    // }
 
     let result = ""
     let final = ""
-    async function f() {
-        
-
-        let promise = new Promise((resolve, reject) => {
-            authPim().then((authResponse) => {
-                console.log("Authenticated!")
-                fetchAttributes(tagnumber = "Arsenal", authResponse.access_token)
-                    .then((reposonse) => {
-                        console.log("Fetched Attributes!")
-                        let arrkeys = Object.keys(reposonse.attrs);
-                        let obj = {};
-                        let arrModifiedData = [];
-                        arrkeys.map((key) => {
-                            obj[reposonse.attrs[key].name] = reposonse.attrs[key].value;
-                            return '';
-                        });
-                        let fields = Object.keys(obj);
-                        const csv = json2csv(obj, fields);
-                        let fileName = "./generated/" + tagnumber + "-attributes-" + new Date().getTime() + ".csv";
-                        try {
-                            fs.writeFileSync(fileName, csv);
-                            final = "File Saved!";
-                            resolve("File Saved!")
-                        } catch (error) {
-                            resolve(err.message)
-                            final = err.message;
-                        }
-                    })
-            });
-
+    let promise = new Promise((resolve, reject) => {
+        authPim().then((authResponse) => {
+            console.log("Authenticated!")
+            fetchAttributes(tagnumber = "Arsenal", authResponse.access_token)
+                .then((reposonse) => {
+                    console.log("Fetched Attributes!")
+                    let arrkeys = Object.keys(reposonse.attrs);
+                    let obj = {};
+                    let arrModifiedData = [];
+                    arrkeys.map((key) => {
+                        obj[reposonse.attrs[key].name] = reposonse.attrs[key].value;
+                        return '';
+                    });
+                    let fields = Object.keys(obj);
+                    const csv = json2csv(obj, fields);
+                    let fileName = "./generated/" + tagnumber + "-attributes-" + new Date().getTime() + ".csv";
+                    try {
+                        // fs.writeFileSync(fileName, csv);
+                        resolve(csv)
+                    } catch (error) {
+                        resolve(err.message)
+                    }
+                })
         });
 
-        result = await promise; // wait until the promise resolves (*)
+    });
 
-        
-    }
-
-    f();   
+    result = await promise;
     context.res = {
         // status: 200, /* Defaults to 200 */
-        body: final + result
-    }; 
-
+        headers: {
+            'Content-Type': 'text/csv',
+            "Content-Disposition": `attachment; filename=attributes.csv`
+        },
+        body: result
+    };
 }
