@@ -2,7 +2,6 @@ const settings = require("./settings.json");
 const pimApis = require("./api/api-pim360");
 const reqprom = require('request-promise');
 const json2csv = require("json2csv").parse;
-const fs = require('fs-extra');
 
 module.exports = async function (context, req) {
 
@@ -23,13 +22,7 @@ module.exports = async function (context, req) {
         return reqprom.get(options)
     }
 
-    // var dir = './generated';
-    // if (!fs.existsSync(dir)) {
-    //     fs.mkdirSync(dir);
-    // }
-
     let result = ""
-    let final = ""
     let promise = new Promise((resolve, reject) => {
         authPim().then((authResponse) => {
             console.log("Authenticated!")
