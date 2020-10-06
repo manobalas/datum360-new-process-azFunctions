@@ -1,9 +1,9 @@
 {
   "credentials": { "username": "ranjithdinakaran", "password": "Drk_13232104" },
   "paths": {
-    "acl": "https://d-lab-2019.acl360.io/",
-    "pim": "https://d-lab-2019.pim360.io/",
-    "cls": "https://d-lab-2019.cls360.io/",
-    "ddm": "https://d-lab-2019.ddm360.io/"
+    "acl": "https://d-lab-2020.acl360.io/",
+    "pim": "https://d-lab-2020.pim360.io/",
+    "cls": "https://d-lab-2020.cls360.io/",
+    "ddm": "https://d-lab-2020.ddm360.io/"
   }
 }
