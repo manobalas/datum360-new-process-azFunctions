@@ -2,7 +2,6 @@
 const fs = require('fs-extra');
 const pimApis = require("../api/api-pim360");
 const reqprom = require('request-promise');
-const { resolve } = require('path');
 const json2csv = require("json2csv").parse;
 
 

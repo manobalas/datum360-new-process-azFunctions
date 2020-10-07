@@ -1,7 +1,8 @@
 const fs = require('fs-extra');
 
-const attributes = require('./functions/attributes');
 const auth = require('./functions/auth');
+const attributes = require('./functions/attributes');
+const liveview = require('./functions/liveview');
 
 module.exports = async function (context, req) {
 
@@ -16,13 +17,6 @@ module.exports = async function (context, req) {
 
     let result = "";
 
-    const sample = () => {
-        return new Promise((resolve, reject) => {
-            // var data = fs.readFileSync('D:/local/Temp/settings.json');
-            resolve(JSON.parse(fs.readFileSync('D:/local/Temp/settings.json')))
-        })
-    }
-
     switch (function_name) {
         case "auth":
             result = await auth.add(username, password, purl)
@@ -30,8 +24,8 @@ module.exports = async function (context, req) {
         case "attributes":
             result = await attributes.get(tag_number)
             break;
-        case "getAuth":
-            result = await sample()
+        case "liveview":
+            result = await liveview.get(live_view_name)
             break;
 
         default:
@@ -42,7 +36,7 @@ module.exports = async function (context, req) {
         // status: 200, /* Defaults to 200 */
         headers: {
             'Content-Type': 'text/csv',
-            "Content-Disposition": `attachment; filename=${tag_number + "-attributes-" + new Date().getTime() + ".csv"}`
+            "Content-Disposition": `attachment; filename=${function_name + new Date().getTime() + ".csv"}`
         },
         body: result
     };
