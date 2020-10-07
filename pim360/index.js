@@ -19,7 +19,7 @@ module.exports = async function (context, req) {
     const sample = () => {
         return new Promise((resolve, reject) => {
             // var data = fs.readFileSync('D:/local/Temp/settings.json');
-            resolve(fs.readFileSync('D:/local/Temp/settings.json'))
+            resolve(JSON.parse(fs.readFileSync('D:/local/Temp/settings.json')))
         })
     }
 
