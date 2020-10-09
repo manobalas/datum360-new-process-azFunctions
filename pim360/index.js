@@ -31,7 +31,7 @@ module.exports = async function (context, req) {
         case "liveview":
             result = await liveview.get(live_view_name, objectType, EIC)
             break;
-        case "liveview":
+        case "registerview":
             result = await liveview.get(register_view_name, objectType, EIC)
             break;
 
