@@ -12,6 +12,7 @@ module.exports = async function (context, req) {
     const tag_number = (req.query.tag_number);
     const live_view_name = (req.query.live_view_name);
     const objectType = (req.query.objectType);
+    //
     const EIC = (req.query.EIC);
     const register_view_name = (req.query.register_view_name);
 
