@@ -14,7 +14,7 @@ module.exports = async function (context, req) {
     const live_view_name = (req.query.live_view_name);
     const objectType = (req.query.objectType);
     // some
-    const EIC = (req.query.EIC);
+    const EIC = (req.query.EIC) == undefined ? '' : (req.query.EIC);
     const register_view_name = (req.query.register_view_name);
 
     const function_name = (req.query.function_name || "attributes");
