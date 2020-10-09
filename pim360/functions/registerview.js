@@ -42,7 +42,7 @@ const get = function (register_view_name, objectType, EIC) {
                 return pim.getEicByID(EIC);
             }).then((eic) => {
                 eic_hdl = eic.hdl;                
-                return pim.getCustomViews("LIVE_VIEW", "");
+                return pim.getCustomViews("REGISTER", "");
             }).then((arrLiveView) => {
                 console.log("Working on it ......")
                 let filterdData = arrLiveView.filter((e) => e.Name == nameToFilter);
