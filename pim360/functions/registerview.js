@@ -58,7 +58,7 @@ const get = function (register_view_name, objectType, EIC) {
                 console.log("Fetching Live View ......")
                 let createQueryBody = {
                     "type": objectType,
-                    "eic": eic_hdl,
+                    "eic": eic_hdl.length > 0 ? eic_hdl : "",
                     "filter": result.Data.conditions,
                     "fields": result.Data.fields
                 }
