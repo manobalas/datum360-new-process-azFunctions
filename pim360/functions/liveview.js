@@ -61,7 +61,7 @@ const get = function (live_view_name, objectType, EIC) {
                     "filter": result.Data.conditions,
                     "fields": result.Data.fields
                 }
-                resolve(createQueryBody)
+//                 resolve(createQueryBody)
                 return pim.postRequest(JSON.parse(fs.readFileSync('D:/local/Temp/settings.json')).paths.pim + "api/queries", createQueryBody, 'pim')
             }).then((response) => {
                 console.log("Fetching ......")
