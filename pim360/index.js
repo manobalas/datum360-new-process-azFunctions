@@ -11,6 +11,8 @@ module.exports = async function (context, req) {
     const purl = (req.query.purl);
     const tag_number = (req.query.tag_number);
     const live_view_name = (req.query.live_view_name);
+    const objectType = (req.query.objectType);
+    const EIC = (req.query.EIC);
     const register_view_name = (req.query.register_view_name);
 
     const function_name = (req.query.function_name || "attributes");
@@ -25,7 +27,7 @@ module.exports = async function (context, req) {
             result = await attributes.get(tag_number)
             break;
         case "liveview":
-            result = await liveview.get(live_view_name)
+            result = await liveview.get(live_view_name, objectType, EIC)
             break;
 
         default:

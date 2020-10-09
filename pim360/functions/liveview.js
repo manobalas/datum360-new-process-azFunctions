@@ -4,9 +4,10 @@ const reqprom = require('request-promise');
 const json2csv = require("json2csv").parse;
 
 
-const get = function (live_view_name) {
+const get = function (live_view_name, objectType, EIC) {
 
     let pim = null;
+    let eic_hdl = "";
     function authPim() {
         console.log("Authenticating ......")
         pim = new pimApis(JSON.parse(fs.readFileSync('D:/local/Temp/settings.json')));
@@ -30,9 +31,16 @@ const get = function (live_view_name) {
 
     return new Promise((resolve, reject) => {
         try {
-            let nameToFilter = live_view_name;
+            let nameToFilter = live_view_name;            
+            // authPim().then((authResponse) => {
+            //     console.log("Authenticated!")
+            //     return pim.getCustomViews("LIVE_VIEW", "");
+            // })
             authPim().then((authResponse) => {
-                console.log("Authenticated!")
+                console.log("Authenticated!");
+                return pim.getEicByID(EIC);
+            }).then((eic) => {
+                eic_hdl = eic.hdl;                
                 return pim.getCustomViews("LIVE_VIEW", "");
             }).then((arrLiveView) => {
                 console.log("Working on it ......")
@@ -48,8 +56,8 @@ const get = function (live_view_name) {
             }).then((result) => {
                 console.log("Fetching Live View ......")
                 let createQueryBody = {
-                    "type": "TAGGED_ITEM",
-                    "eic": "",
+                    "type": objectType,
+                    "eic": eic_hdl,
                     "filter": result.Data.conditions,
                     "fields": result.Data.fields
                 }
