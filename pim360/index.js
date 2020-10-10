@@ -39,7 +39,7 @@ module.exports = async function (context, req) {
         case "registerview":
             result = await registerview.get(register_view_name, objectType, EIC)
             break;
-        case "import":
+        case "import":            
             result = await importfun.upload(filebody, req)
             break;
 
