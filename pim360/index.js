@@ -4,7 +4,7 @@ const auth = require('./functions/auth');
 const attributes = require('./functions/attributes');
 const liveview = require('./functions/liveview');
 const registerview = require('./functions/registerview');
-const importfun = require('./functions/import');
+const importfun = require('./functions/importfun');
 
 module.exports = async function (context, req) {
 
@@ -38,9 +38,9 @@ module.exports = async function (context, req) {
         case "registerview":
             result = await registerview.get(register_view_name, objectType, EIC)
             break;
-        case "import":
-            result = await import.upload(filebody, some)
-            break;
+        // case "import":
+        //     result = await import.upload(filebody, some)
+        //     break;
 
         default:
             break;
