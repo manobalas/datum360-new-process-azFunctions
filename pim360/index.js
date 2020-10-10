@@ -18,6 +18,7 @@ module.exports = async function (context, req) {
     const EIC = (req.query.EIC) == undefined ? '' : (req.query.EIC);
     const register_view_name = (req.query.register_view_name);
 
+    // example
     const filebody = (req.body && req.body.file);
     const some = (req.body && req.body.some);
 
@@ -39,7 +40,7 @@ module.exports = async function (context, req) {
             result = await registerview.get(register_view_name, objectType, EIC)
             break;
         case "import":
-            result = await importfun.upload(filebody, some)
+            result = await importfun.upload(filebody, req)
             break;
 
         default:
