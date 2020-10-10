@@ -4,6 +4,7 @@ const auth = require('./functions/auth');
 const attributes = require('./functions/attributes');
 const liveview = require('./functions/liveview');
 const registerview = require('./functions/registerview');
+const importfun = require('./functions/import');
 
 module.exports = async function (context, req) {
 
@@ -16,6 +17,9 @@ module.exports = async function (context, req) {
     // some
     const EIC = (req.query.EIC) == undefined ? '' : (req.query.EIC);
     const register_view_name = (req.query.register_view_name);
+
+    const filebody = (req.body.file);
+    const some = (req.body.some);
 
     const function_name = (req.query.function_name || "attributes");
 
@@ -34,17 +38,26 @@ module.exports = async function (context, req) {
         case "registerview":
             result = await registerview.get(register_view_name, objectType, EIC)
             break;
+        case "import":
+            result = await import.upload(filebody, some)
+            break;
 
         default:
             break;
     }
 
+    let normalHeader = {
+        'Content-Type': 'text/csv',
+        "Content-Disposition": `attachment; filename=${function_name + new Date().getTime() + ".csv"}`
+    }
+
+    let jsonHeader = {
+        'Content-Type': 'application/json',        
+    }
+
     context.res = {
         // status: 200, /* Defaults to 200 */
-        headers: {
-            'Content-Type': 'text/csv',
-            "Content-Disposition": `attachment; filename=${function_name + new Date().getTime() + ".csv"}`
-        },
+        headers: function_name == "import" ? jsonHeader : normalHeader,
         body: result
     };
 }
