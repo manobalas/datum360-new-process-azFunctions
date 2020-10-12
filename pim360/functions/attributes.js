@@ -5,7 +5,7 @@ const reqprom = require('request-promise');
 const json2csv = require("json2csv").parse;
 
 
-const get = function (tag_number) {
+const get = function (tag_number, function_name) {
     try {
         const settings = fs.readFileSync('D:/local/Temp/settings.json')
         // if (settings) {
