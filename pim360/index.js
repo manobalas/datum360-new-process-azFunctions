@@ -31,7 +31,10 @@ module.exports = async function (context, req) {
             result = await auth.add(username, password, purl)
             break;
         case "attributes":
-            result = await attributes.get(tag_number)
+            result = await attributes.get(tag_number, function_name)
+            break;
+        case "csvattributes":
+            result = await attributes.get(tag_number, function_name)
             break;
         case "liveview":
             result = await liveview.get(live_view_name, objectType, EIC)
