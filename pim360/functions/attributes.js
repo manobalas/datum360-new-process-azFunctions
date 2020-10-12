@@ -41,7 +41,8 @@ const get = function (tag_number, function_name) {
                                 });
                                 let fields = Object.keys(obj);
                                 const csv = json2csv(obj, fields);
-                                resolve(obj)
+                                let finalll = function_name == "attributes" ? csv : obj;
+                                resolve(finalll)
                             } catch (error) {
                                 resolve("Something Went Wrong")
                             }
