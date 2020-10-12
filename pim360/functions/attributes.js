@@ -41,7 +41,7 @@ const get = function (tag_number) {
                                 });
                                 let fields = Object.keys(obj);
                                 const csv = json2csv(obj, fields);
-                                resolve(csv)
+                                resolve(obj)
                             } catch (error) {
                                 resolve("Something Went Wrong")
                             }
