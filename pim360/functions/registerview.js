@@ -80,7 +80,8 @@ const get = function (register_view_name, objectType, EIC) {
                 });
                 let fields = Object.keys(arrModifiedData[0]);
                 const csv = json2csv(arrModifiedData, fields);
-                resolve(csv)
+                let finalll = type == "json" ? arrModifiedData : csv
+                resolve(finalll)
             }).catch(err => {
                 resolve(err)
             })
