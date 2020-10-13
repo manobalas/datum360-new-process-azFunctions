@@ -37,10 +37,16 @@ module.exports = async function (context, req) {
             result = await attributes.get(tag_number, function_name)
             break;
         case "liveview":
-            result = await liveview.get(live_view_name, objectType, EIC)
+            result = await liveview.get(live_view_name, objectType, EIC, "csv")
             break;
         case "registerview":
-            result = await registerview.get(register_view_name, objectType, EIC)
+            result = await registerview.get(register_view_name, objectType, EIC, "csv")
+            break;
+        case "jsonliveview":
+            result = await liveview.get(live_view_name, objectType, EIC, "json")
+            break;
+        case "jsonregisterview":
+            result = await registerview.get(register_view_name, objectType, EIC, "json")
             break;
         case "import":            
             result = await importfun.upload(filebody, req)
@@ -61,7 +67,7 @@ module.exports = async function (context, req) {
 
     context.res = {
         // status: 200, /* Defaults to 200 */
-        headers: function_name == "import" ||  function_name == "attributes" ? jsonHeader : normalHeader,
+        headers: function_name == "import" ||  function_name == "attributes" ||  function_name == "jsonliveview" ||  function_name == "jsonregisterview" ? jsonHeader : normalHeader,
         body: result
     };
 }
