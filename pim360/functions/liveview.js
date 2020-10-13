@@ -4,7 +4,7 @@ const reqprom = require('request-promise');
 const json2csv = require("json2csv").parse;
 
 
-const get = function (live_view_name, objectType, EIC) {
+const get = function (live_view_name, objectType, EIC, type) {
 
     let pim = null;
     let eic_hdl = "";
@@ -79,7 +79,8 @@ const get = function (live_view_name, objectType, EIC) {
                 });
                 let fields = Object.keys(arrModifiedData[0]);
                 const csv = json2csv(arrModifiedData, fields);
-                resolve(csv)
+                let finalll = type == "json" ? arrModifiedData : csv
+                resolve(finalll)
             }).catch(err => {
                 resolve(err)
             })
