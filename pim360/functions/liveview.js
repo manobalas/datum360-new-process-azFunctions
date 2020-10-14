@@ -75,7 +75,7 @@ const get = function (live_view_name) {
                 });
                 let fields = Object.keys(arrModifiedData[0]);
                 const csv = json2csv(arrModifiedData, fields);
-                resolve(csv)
+                resolve(arrModifiedData)
             }).catch(err => {
                 resolve(err)
             })
