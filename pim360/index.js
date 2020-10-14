@@ -34,7 +34,7 @@ module.exports = async function (context, req) {
             result = await attributes.get(tag_number)
             break;
         case "liveview":
-            result = await liveview.get(live_view_name, objectType, EIC)
+            result = await liveview.get(live_view_name)
             break;
         case "registerview":
             result = await registerview.get(register_view_name, objectType, EIC)
@@ -58,7 +58,7 @@ module.exports = async function (context, req) {
 
     context.res = {
         // status: 200, /* Defaults to 200 */
-        headers: function_name == "import" ? jsonHeader : normalHeader,
+        headers: function_name == "import" ||  function_name == "liveview" ? jsonHeader : normalHeader,
         body: result
     };
 }
