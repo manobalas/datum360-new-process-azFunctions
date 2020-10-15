@@ -35,7 +35,7 @@ module.exports = async function (context, req) {
             result = await attributes.get(tag_number)
             break;
         case "post_attributes":
-            result = await post_attributes.get(tag_number)
+            result = await post_attributes.get(encodeURIComponent(tag_number))
             break;
         case "liveview":
             result = await liveview.get(live_view_name)
