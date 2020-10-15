@@ -35,7 +35,10 @@ module.exports = async function (context, req) {
             result = await attributes.get(tag_number)
             break;
         case "post_attributes":
-            result = await post_attributes.get(encodeURIComponent(tag_number))
+            result = await post_attributes.get(encodeURIComponent(tag_number), "csv")
+            break;
+        case "post_attributes_json":
+            result = await post_attributes.get(encodeURIComponent(tag_number), "json")
             break;
         case "liveview":
             result = await liveview.get(live_view_name)
@@ -62,7 +65,7 @@ module.exports = async function (context, req) {
 
     context.res = {
         // status: 200, /* Defaults to 200 */
-        headers: function_name == "import" || function_name == "liveview" ? jsonHeader : normalHeader,
+        headers: function_name == "import" || function_name == "liveview" || function_name == "post_attributes_json" ? jsonHeader : normalHeader,
         body: result
     };
 }

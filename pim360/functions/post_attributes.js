@@ -5,7 +5,7 @@ const reqprom = require('request-promise');
 const json2csv = require("json2csv").parse;
 
 
-const get = function (tag_number) {
+const get = function (tag_number, op_type) {
     try {
         const settings = fs.readFileSync('D:/local/Temp/settings.json')
         // if (settings) {
@@ -41,7 +41,8 @@ const get = function (tag_number) {
                                 });
                                 let fields = Object.keys(obj);
                                 const csv = json2csv(obj, fields);
-                                resolve(csv)
+                                let finalll = op_type == "json" ? obj : csv
+                                resolve(finalll)
                             } catch (error) {
                                 resolve("Something Went Wrong")
                             }
