@@ -67,7 +67,7 @@ module.exports = async function (context, req) {
 
     context.res = {
         // status: 200, /* Defaults to 200 */
-        headers: function_name == "import" ||  function_name == "attributes" ||  function_name == "jsonliveview" ||  function_name == "jsonregisterview" ? jsonHeader : normalHeader,
+        headers: function_name == "auth" || function_name == "import" ||  function_name == "attributes" ||  function_name == "jsonliveview" ||  function_name == "jsonregisterview" ? jsonHeader : normalHeader,
         body: result
     };
 }
