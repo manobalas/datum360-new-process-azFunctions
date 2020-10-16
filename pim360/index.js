@@ -3,6 +3,7 @@ const fs = require('fs-extra');
 const auth = require('./functions/auth');
 const attributes = require('./functions/attributes');
 const liveview = require('./functions/liveview');
+const liveview_tag_number = require('./functions/liveview_tag_number');
 const post_attributes = require('./functions/post_attributes');
 const registerview = require('./functions/registerview');
 const importfun = require('./functions/importfun');
@@ -42,6 +43,9 @@ module.exports = async function (context, req) {
             break;
         case "liveview":
             result = await liveview.get(live_view_name)
+            break;
+        case "liveview_tag_number":
+            result = await liveview_tag_number.get(live_view_name)
             break;
         case "registerview":
             result = await registerview.get(register_view_name, objectType, EIC)
