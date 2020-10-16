@@ -69,7 +69,7 @@ module.exports = async function (context, req) {
 
     context.res = {
         // status: 200, /* Defaults to 200 */
-        headers: function_name == "import" || function_name == "liveview" || function_name == "post_attributes_json" || function_name == "liveview_tag_number" ? jsonHeader : normalHeader,
+        headers: function_name == "auth" || function_name == "import" || function_name == "liveview" || function_name == "post_attributes_json" || function_name == "liveview_tag_number" ? jsonHeader : normalHeader,
         body: result
     };
 }
