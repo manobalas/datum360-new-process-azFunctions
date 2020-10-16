@@ -17,9 +17,9 @@ const add = function (username, password, prefix_url) {
         try {
             fs.writeFileSync('D:/local/Temp/settings.json', JSON.stringify(authJSON))
             // console.log("Credentials Added!")
-            resolve("Credentials Added!")
+            resolve({"response": "Credentials Added!"})
         } catch (err) {
-            resolve(err)
+            resolve({"response": err})
             // console.error(err)
         }
     });
