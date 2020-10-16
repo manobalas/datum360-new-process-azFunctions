@@ -4,7 +4,7 @@ const reqprom = require('request-promise');
 const json2csv = require("json2csv").parse;
 
 
-const get = function (live_view_name, objectType, EIC, type) {
+const get = function (live_view_name) {
 
     let pim = null;
     let eic_hdl = "";
@@ -36,11 +36,7 @@ const get = function (live_view_name, objectType, EIC, type) {
             //     console.log("Authenticated!")
             //     return pim.getCustomViews("LIVE_VIEW", "");
             // })
-            authPim().then((authResponse) => {
-                console.log("Authenticated!");
-                return pim.getEicByID(EIC);
-            }).then((eic) => {
-                eic_hdl = eic.hdl;                
+            authPim().then((authResponse) => {                              
                 return pim.getCustomViews("LIVE_VIEW", "");
             }).then((arrLiveView) => {
                 console.log("Working on it ......")
@@ -56,7 +52,7 @@ const get = function (live_view_name, objectType, EIC, type) {
             }).then((result) => {
                 console.log("Fetching Live View ......")
                 let createQueryBody = {
-                    "type": result.Model,
+                    "type":  result.Model,
                     "eic":  result.Data.eicHdl,
                     "filter": result.Data.conditions,
                     "fields": result.Data.fields
@@ -81,8 +77,7 @@ const get = function (live_view_name, objectType, EIC, type) {
                 });
                 let fields = Object.keys(arrModifiedData[0]);
                 const csv = json2csv(arrModifiedData, fields);
-                let finalll = type == "json" ? arrModifiedData : csv
-                //resolve(finalll)
+                //resolve(arrModifiedData)
                 resolve(finalTagNumbers)
             }).catch(err => {
                 resolve(err)
