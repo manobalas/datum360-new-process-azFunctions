@@ -70,17 +70,20 @@ const get = function (live_view_name, objectType, EIC, type) {
                 console.log("Finalizing ......")
                 let arrFirstObjKeys = Object.keys(finalResult[0]).filter(e => typeof finalResult[0][e] == 'object')
                 let arrModifiedData = [];
+                let finalTagNumbers = [];
                 finalResult.map((item) => {
                     let obj = {};
                     arrFirstObjKeys.map((key) => {
                         obj[item[key].name] = item[key].value;
                     });
+                    finalTagNumbers.push(obj['Tag Number'])
                     arrModifiedData.push(obj);
                 });
                 let fields = Object.keys(arrModifiedData[0]);
                 const csv = json2csv(arrModifiedData, fields);
                 let finalll = type == "json" ? arrModifiedData : csv
-                resolve(finalll)
+                //resolve(finalll)
+                resolve(finalTagNumbers)
             }).catch(err => {
                 resolve(err)
             })
