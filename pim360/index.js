@@ -5,6 +5,7 @@ const attributes = require('./functions/attributes');
 const liveview = require('./functions/liveview');
 const registerview = require('./functions/registerview');
 const importfun = require('./functions/importfun');
+const geojsontocsv = require('./functions/geojsontocsv');
 
 module.exports = async function (context, req) {
 
@@ -48,8 +49,11 @@ module.exports = async function (context, req) {
         case "jsonregisterview":
             result = await registerview.get(register_view_name, objectType, EIC, "json")
             break;
-        case "import":            
+        case "import":
             result = await importfun.upload(filebody, req)
+            break;
+        case "geojsonTocsv":
+            result = await geojsontocsv.upload(filebody, req)
             break;
 
         default:
@@ -62,12 +66,12 @@ module.exports = async function (context, req) {
     }
 
     let jsonHeader = {
-        'Content-Type': 'application/json',        
+        'Content-Type': 'application/json',
     }
 
     context.res = {
         // status: 200, /* Defaults to 200 */
-        headers: function_name == "auth" || function_name == "import" ||  function_name == "attributes" ||  function_name == "jsonliveview" ||  function_name == "jsonregisterview" ? jsonHeader : normalHeader,
+        headers: function_name == "auth" || function_name == "import" || function_name == "attributes" || function_name == "jsonliveview" || function_name == "jsonregisterview" ? jsonHeader : normalHeader,
         body: result
     };
 }
