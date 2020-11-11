@@ -4,6 +4,7 @@ const auth = require('./functions/auth');
 const attributes = require('./functions/attributes');
 const liveview = require('./functions/liveview');
 const liveview_tag_number = require('./functions/liveview_tag_number');
+const liveviewcsv = require('./functions/liveview_csv');
 const post_attributes = require('./functions/post_attributes');
 const registerview = require('./functions/registerview');
 const importfun = require('./functions/importfun');
