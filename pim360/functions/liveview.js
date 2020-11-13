@@ -31,7 +31,7 @@ const get = function (live_view_name, objectType, EIC, type) {
 
     return new Promise((resolve, reject) => {
         try {
-            let nameToFilter = live_view_name;            
+            let nameToFilter = live_view_name;
             // authPim().then((authResponse) => {
             //     console.log("Authenticated!")
             //     return pim.getCustomViews("LIVE_VIEW", "");
@@ -40,7 +40,7 @@ const get = function (live_view_name, objectType, EIC, type) {
                 console.log("Authenticated!");
                 return pim.getEicByID(EIC);
             }).then((eic) => {
-                eic_hdl = eic.hdl;                
+                eic_hdl = eic.hdl;
                 return pim.getCustomViews("LIVE_VIEW", "");
             }).then((arrLiveView) => {
                 console.log("Working on it ......")
@@ -61,7 +61,7 @@ const get = function (live_view_name, objectType, EIC, type) {
                     "filter": result.Data.conditions,
                     "fields": result.Data.fields
                 }
-//                 resolve(createQueryBody)
+                //                 resolve(createQueryBody)
                 return pim.postRequest(JSON.parse(fs.readFileSync('D:/local/Temp/settings.json')).paths.pim + "api/queries", createQueryBody, 'pim')
             }).then((response) => {
                 console.log("Fetching ......")
@@ -79,7 +79,29 @@ const get = function (live_view_name, objectType, EIC, type) {
                 });
                 let fields = Object.keys(arrModifiedData[0]);
                 const csv = json2csv(arrModifiedData, fields);
-                let finalll = type == "json" ? arrModifiedData : csv
+
+                let baseobj = {
+                    "type": "FeatureCollection",
+                    "crs": {
+                        "type": "name",
+                        "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" }
+                    },
+
+                    "features": []
+                }
+                arrModifiedData.map(i => {
+                    let tempobjj = {
+                        "type": "Feature",
+                        "properties": { ...i },
+                        "geometry": {
+                            "type": "Point",
+                            "coordinates": [0, 0]
+                        }
+                    }
+                    baseobj.features.push(tempobjj)
+                })
+
+                let finalll = type == "json" ? arrModifiedData : (type == "geojson" ? baseobj : csv)
                 resolve(finalll)
             }).catch(err => {
                 resolve(err)
