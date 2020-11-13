@@ -4,7 +4,7 @@ const reqprom = require('request-promise');
 const json2csv = require("json2csv").parse;
 
 
-const get = function (live_view_name) {
+const get = function (live_view_name, op_type) {
 
     let pim = null;
     let eic_hdl = "";
@@ -31,12 +31,12 @@ const get = function (live_view_name) {
 
     return new Promise((resolve, reject) => {
         try {
-            let nameToFilter = live_view_name;            
+            let nameToFilter = live_view_name;
             // authPim().then((authResponse) => {
             //     console.log("Authenticated!")
             //     return pim.getCustomViews("LIVE_VIEW", "");
             // })
-            authPim().then((authResponse) => {                              
+            authPim().then((authResponse) => {
                 return pim.getCustomViews("LIVE_VIEW", "");
             }).then((arrLiveView) => {
                 console.log("Working on it ......")
@@ -52,12 +52,12 @@ const get = function (live_view_name) {
             }).then((result) => {
                 console.log("Fetching Live View ......")
                 let createQueryBody = {
-                    "type":  result.Model,
-                    "eic":  result.Data.eicHdl,
+                    "type": result.Model,
+                    "eic": result.Data.eicHdl,
                     "filter": result.Data.conditions,
                     "fields": result.Data.fields
                 }
-//                 resolve(createQueryBody)
+                //                 resolve(createQueryBody)
                 return pim.postRequest(JSON.parse(fs.readFileSync('D:/local/Temp/settings.json')).paths.pim + "api/queries", createQueryBody, 'pim')
             }).then((response) => {
                 console.log("Fetching ......")
@@ -75,7 +75,38 @@ const get = function (live_view_name) {
                 });
                 let fields = Object.keys(arrModifiedData[0]);
                 const csv = json2csv(arrModifiedData, fields);
-                resolve(arrModifiedData)
+
+                let baseobj = {
+                    "type": "FeatureCollection",
+                    "crs": {
+                        "type": "name",
+                        "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" }
+                    },
+
+                    "features": []
+                }
+                //
+                arrModifiedData.map(i => {
+                    let tempobjj = {
+                        "type": "Feature",
+                        "properties": { ...i },
+                        "geometry": {
+                            "type": "Point",
+                            "coordinates": [0, 0]
+                        }
+                    }
+                    baseobj.features.push(tempobjj)
+                })
+
+
+                // op_type
+                let finalll = null;
+                if (op_type == "geojson") {
+                    finalll = baseobj;
+                } else {
+                    finalll = arrModifiedData
+                }
+                resolve(finalll)
             }).catch(err => {
                 resolve(err)
             })

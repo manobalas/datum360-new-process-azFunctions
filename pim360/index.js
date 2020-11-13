@@ -43,7 +43,10 @@ module.exports = async function (context, req) {
             result = await post_attributes.get(encodeURIComponent(tag_number), "json")
             break;
         case "liveview":
-            result = await liveview.get(live_view_name)
+            result = await liveview.get(live_view_name, "")
+            break;
+        case "liveview_to_geojson":
+            result = await liveview.get(live_view_name, "geojson")
             break;
         case "liveview_csv":
             result = await liveviewcsv.get(live_view_name)
