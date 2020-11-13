@@ -89,6 +89,7 @@ const get = function (live_view_name, objectType, EIC, type) {
 
                     "features": []
                 }
+                //
                 arrModifiedData.map(i => {
                     let tempobjj = {
                         "type": "Feature",
