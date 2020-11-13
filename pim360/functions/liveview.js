@@ -101,7 +101,16 @@ const get = function (live_view_name, objectType, EIC, type) {
                     baseobj.features.push(tempobjj)
                 })
 
-                let finalll = type == "json" ? arrModifiedData : (type == "geojson" ? baseobj : csv)
+                let finalll = null;
+                if(type == "json") {
+                    finalll = arrModifiedData
+                }
+                if(type == "csv") {
+                    finalll = csv
+                }
+                if(type == "geojson") {
+                    finalll = baseobj
+                }
                 resolve(finalll)
             }).catch(err => {
                 resolve(err)
