@@ -87,12 +87,14 @@ const get = function (live_view_name, op_type) {
                 }
                 //
                 arrModifiedData.map(i => {
+                    let lat = i.hasOwnProperty("LATITUDE") ? parseFloat(i.LATITUDE) : 0
+                    let lng = i.hasOwnProperty("LONGITUDE") ? parseFloat(i.LONGITUDE) : 0
                     let tempobjj = {
                         "type": "Feature",
                         "properties": { ...i },
                         "geometry": {
                             "type": "Point",
-                            "coordinates": [0, 0]
+                            "coordinates": [lat, lng]
                         }
                     }
                     baseobj.features.push(tempobjj)
