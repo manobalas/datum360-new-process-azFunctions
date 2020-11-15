@@ -87,8 +87,8 @@ const get = function (live_view_name, op_type) {
                 }
                 //
                 arrModifiedData.map(i => {
-                    let lat = i.hasOwnProperty("LATITUDE") ? parseFloat(i.LATITUDE) : 0
-                    let lng = i.hasOwnProperty("LONGITUDE") ? parseFloat(i.LONGITUDE) : 0
+                    let lat = i.hasOwnProperty("LATITUDE") ? parseFloat(i.LATITUDE) : (i.hasOwnProperty("Latitude") ? parseFloat(i.Latitude) : 0)
+                    let lng = i.hasOwnProperty("LONGITUDE") ? parseFloat(i.LONGITUDE) : (i.hasOwnProperty("Longitude") ? parseFloat(i.Longitude) : 0)
                     let tempobjj = {
                         "type": "Feature",
                         "properties": { ...i },
