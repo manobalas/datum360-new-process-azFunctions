@@ -84,8 +84,14 @@ const get = function (live_view_name, op_type) {
                 let fields = Object.keys(arrModifiedData[0]);
                 const csv = json2csv(arrModifiedData, fields);
 
+                // "crs": {
+                    //     "type": "name",
+                    //     "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" }
+                    // },
+
                 let baseobj = {
                     "type": "FeatureCollection",
+                    
                     "features": []
                 }
                 //
