@@ -29,6 +29,14 @@ const get = function (live_view_name, op_type) {
             })
     }
 
+    function isNaNCheckReturn(value) {
+        if(isNaN(value)) {
+            return 0
+        } else {
+            return value
+        }
+    }
+
     return new Promise((resolve, reject) => {
         try {
             let nameToFilter = live_view_name;
@@ -87,8 +95,8 @@ const get = function (live_view_name, op_type) {
                 }
                 //
                 arrModifiedData.map(i => {
-                    let lat = i.hasOwnProperty("LATITUDE") ? parseFloat(i.LATITUDE) : (i.hasOwnProperty("Latitude") ? parseFloat(i.Latitude) : (i.hasOwnProperty("Approved Latitude") ? parseFloat(i['Approved Latitude']) : 0))
-                    let lng = i.hasOwnProperty("LONGITUDE") ? parseFloat(i.LONGITUDE) : (i.hasOwnProperty("Longitude") ? parseFloat(i.Longitude) : (i.hasOwnProperty("Approved Longitude") ? parseFloat(i['Approved Longitude']) : 0))
+                    let lat = i.hasOwnProperty("LATITUDE") ? isNaNCheckReturn(i.LATITUDE) : (i.hasOwnProperty("Latitude") ? isNaNCheckReturn(i.Latitude) : (i.hasOwnProperty("Approved Latitude") ? isNaNCheckReturn(i['Approved Latitude']) : 0))
+                    let lng = i.hasOwnProperty("LONGITUDE") ? isNaNCheckReturn(i.LONGITUDE) : (i.hasOwnProperty("Longitude") ? isNaNCheckReturn(i.Longitude) : (i.hasOwnProperty("Approved Longitude") ? isNaNCheckReturn(i['Approved Longitude']) : 0))
                     let tempobjj = {
                         "type": "Feature",
                         "properties": { ...i },
