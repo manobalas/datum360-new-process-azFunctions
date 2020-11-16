@@ -86,11 +86,6 @@ const get = function (live_view_name, op_type) {
 
                 let baseobj = {
                     "type": "FeatureCollection",
-                    "crs": {
-                        "type": "name",
-                        "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" }
-                    },
-
                     "features": []
                 }
                 //
