@@ -30,10 +30,10 @@ const get = function (live_view_name, op_type) {
     }
 
     function isNaNCheckReturn(value) {
-        if(isNaN(value)) {
+        if(isNaN(parseFloat(value))) {
             return 0
         } else {
-            return value
+            return parseFloat(value)
         }
     }
 
