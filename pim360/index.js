@@ -9,6 +9,25 @@ const post_attributes = require('./functions/post_attributes');
 const registerview = require('./functions/registerview');
 const importfun = require('./functions/importfun');
 
+// const csvChecker = function processData(allText) {
+//     var allTextLines = allText.split(/\r\n|\n/);
+//     var headers = allTextLines[0].split(',');
+//     var lines = [];
+
+//     for (var i=1; i<allTextLines.length; i++) {
+//         var data = allTextLines[i].split(',');
+//         if (data.length == headers.length) {
+
+//             var tarr = [];
+//             for (var j=0; j<headers.length; j++) {
+//                 tarr.push(headers[j]+":"+data[j]);
+//             }
+//             lines.push(tarr);
+//         }
+//     }
+//     return lines.length
+// }
+
 module.exports = async function (context, req) {
 
     const username = (req.query.username);
@@ -46,7 +65,7 @@ module.exports = async function (context, req) {
             result = await liveview.get(live_view_name, "")
             break;
         case "liveview_to_geojson":
-            result = await liveview.get(live_view_name, "geojson")
+            result = await liveview.get(live_view_name, "geojson")            
             break;
         case "liveview_csv":
             result = await liveviewcsv.get(live_view_name)
@@ -67,7 +86,8 @@ module.exports = async function (context, req) {
 
     let normalHeader = {
         'Content-Type': function_name == 'liveview_to_geojson' ? 'application/json' : 'text/csv',
-        "Content-Disposition": `attachment; filename=${function_name + new Date().getTime() + (function_name == 'liveview_to_geojson' ? '.geojson' : ".csv")}`
+        "Content-Disposition": `attachment; filename=${function_name + new Date().getTime() + (function_name == 'liveview_to_geojson' ? '.geojson' : ".csv")}`,
+        "is-cord-avail": function_name == 'liveview_to_geojson' ? result.isCordPresent : false
     }
 
     let jsonHeader = {
@@ -77,6 +97,6 @@ module.exports = async function (context, req) {
     context.res = {
         // status: 200, /* Defaults to 200 */
         headers: function_name == "auth" || function_name == "import" || function_name == "liveview" || function_name == "post_attributes_json" || function_name == "liveview_tag_number" ? jsonHeader : normalHeader,
-        body: result
+        body: function_name == 'liveview_to_geojson' ? result.baseobj : result
     };
 }

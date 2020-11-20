@@ -109,11 +109,19 @@ const get = function (live_view_name, op_type) {
                     baseobj.features.push(tempobjj)
                 })
 
+                let isCordPresent = true;
+                if(baseobj.features.length > 0) {
+                    isCordPresent = baseobj.features[0].properties.hasOwnProperty("LATITUDE") || baseobj.features[0].properties.hasOwnProperty("Latitude") ||  baseobj.features[0].properties.hasOwnProperty("Approved Latitude");
+                }                
+
 
                 // op_type
                 let finalll = null;
                 if (op_type == "geojson") {
-                    finalll = baseobj;
+                    finalll = {
+                        "isCordPresent": isCordPresent,
+                        "baseobj": baseobj
+                    };
                 } else {
                     finalll = arrModifiedData
                 }
