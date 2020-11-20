@@ -109,15 +109,12 @@ const get = function (live_view_name, op_type) {
                     baseobj.features.push(tempobjj)
                 })
 
-                let isCordPresent = true;
+                let isCordPresent = false;
                 if(baseobj.features.length > 0) {
                     let ttobj = Object.keys(baseobj.features[0])
                     ttobj.map(i => {
-                        if(!i.toLocaleLowerCase().includes("latitude")) {
-                            isCordPresent = false
-                        } else {
-                            isCordPresent = true;
-                            break;
+                        if(i.toLowerCase().includes("latitude")) {
+                            isCordPresent = true
                         }
                     })
                 }                
