@@ -115,6 +115,9 @@ const get = function (live_view_name, op_type) {
                     ttobj.map(i => {
                         if(!i.toLocaleLowerCase().includes("latitude")) {
                             isCordPresent = false
+                        } else {
+                            isCordPresent = true;
+                            break;
                         }
                     })
                 }                
