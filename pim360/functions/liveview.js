@@ -111,7 +111,12 @@ const get = function (live_view_name, op_type) {
 
                 let isCordPresent = true;
                 if(baseobj.features.length > 0) {
-                    isCordPresent = baseobj.features[0].properties.hasOwnProperty("LATITUDE") || baseobj.features[0].properties.hasOwnProperty("Latitude") ||  baseobj.features[0].properties.hasOwnProperty("Approved Latitude");
+                    let ttobj = Object.keys(baseobj.features[0])
+                    ttobj.map(i => {
+                        if(!i.toLocaleLowerCase().includes("latitude")) {
+                            isCordPresent = false
+                        }
+                    })
                 }                
 
 
