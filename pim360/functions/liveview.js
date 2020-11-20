@@ -109,15 +109,15 @@ const get = function (live_view_name, op_type) {
                     baseobj.features.push(tempobjj)
                 })
 
-                let isCordPresent = false;
-                if(baseobj.features.length > 0) {
-                    let ttobj = Object.keys(baseobj.features[0])
-                    ttobj.map(i => {
-                        if(i.toLowerCase().includes("latitude")) {
-                            isCordPresent = true
-                        }
-                    })
-                }                
+                let isCordPresent = baseobj.features[0].geometry.coordinates[0] === 0  ? false : true;
+                // if(baseobj.features.length > 0) {
+                //     let ttobj = Object.keys(baseobj.features[0])
+                //     ttobj.map(i => {
+                //         if(i.toLowerCase().includes("latitude")) {
+                //             isCordPresent = true
+                //         }
+                //     })
+                // }                
 
 
                 // op_type
