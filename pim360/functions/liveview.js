@@ -103,7 +103,7 @@ const get = function (live_view_name, op_type) {
                         "properties": { ...i },
                         "geometry": {
                             "type": "Point",
-                            "coordinates": [lat, lng]
+                            "coordinates": [lng, lat]
                         }
                     }
                     baseobj.features.push(tempobjj)
