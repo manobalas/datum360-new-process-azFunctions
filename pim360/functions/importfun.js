@@ -13,7 +13,7 @@ const upload = function (file, some) {
                 stux: new Date()
             }
             var xlsx = json2xlsx(json);
-            fs.writeFileSync('D:/local/Temp/data.xlsx', xlsx, 'binary');
+            fs.writeFileSync('D:/local/Temp/data.xlsx', xlsx);
             resolve({ "response": "test!" })
         } catch (err) {
             resolve({ "response": JSON.stringify(err) })
