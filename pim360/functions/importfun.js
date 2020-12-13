@@ -1,18 +1,17 @@
 const fs = require('fs-extra');
 const reqprom = require('request-promise');
 const json2csv = require("json2csv").parse;
-var json2xlsx = require('node-json-xlsx');
-var json = {
-    foo: 'bar',
-    qux: 'moo',
-    poo: 123,
-    stux: new Date()
-}
-
+const json2xlsx = require('node-json-xlsx');
 
 const upload = function (file, some) {
     return new Promise((resolve, reject) => {
         try {
+            var json = {
+                foo: 'bar',
+                qux: 'moo',
+                poo: 123,
+                stux: new Date()
+            }
             var xlsx = json2xlsx(json);
             fs.writeFileSync('D:/local/Temp/data.xlsx', xlsx, 'binary');
             resolve({ "response": "test!" })
