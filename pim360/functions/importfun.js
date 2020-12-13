@@ -68,9 +68,15 @@ const upload = function (file, some) {
             // }
             // var xlsx = json2xlsx(json);
             // fs.writeFileSync('D:/local/Temp/data.json', xlsx);
-            const filename = 'sample.xlsx';
+            const filename = 'D:/local/Temp/sample.xlsx';
             var xls = json2xls(allUsers);
-            fs.writeFileSync(filename, xls, 'binary')
+            fs.writeFileSync(filename, xls, 'binary', (err) => {
+                if (err) {
+                    // console.log("writeFileSync :", err);
+                    resolve({ "writeFileSync": err })
+                }
+                resolve({ "writeFileSync": "file is saved" })
+            });
             resolve({ "writeFileSync": "file is saved" })
             // resolve({ "response": "test!" })
         } catch (err) {
