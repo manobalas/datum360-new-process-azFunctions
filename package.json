@@ -7,10 +7,11 @@
     "test": "echo \"No tests yet...\""
   },
   "dependencies": {
-    "node-json-xlsx": "0.2.2",
-    "get-form-data": "3.0.0",
     "fs-extra": "^9.0.1",
+    "get-form-data": "3.0.0",
     "json2csv": "^5.0.1",
+    "json2xls": "^0.1.2",
+    "node-json-xlsx": "0.2.2",
     "path": "^0.12.7",
     "request": "^2.88.2",
     "request-promise": "^4.2.6"
