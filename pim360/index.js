@@ -65,7 +65,7 @@ module.exports = async function (context, req) {
             result = await liveview.get(live_view_name, "")
             break;
         case "liveview_to_geojson":
-            result = await liveview.get(live_view_name, "geojson")            
+            result = await liveview.get(live_view_name, "geojson")
             break;
         case "liveview_csv":
             result = await liveviewcsv.get(live_view_name)
@@ -79,13 +79,16 @@ module.exports = async function (context, req) {
         case "import":
             result = await importfun.upload(filebody, req)
             break;
+        case "download":
+            result = await importfun.download(filebody, req)
+            break;
 
         default:
             break;
     }
 
     let normalHeader = {
-        'Content-Type': function_name == 'liveview_to_geojson' ? 'application/json' : (function_name == 'import' ? 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' : 'text/csv'),
+        'Content-Type': function_name == 'liveview_to_geojson' ? 'application/json' : (function_name == 'download' ? 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' : 'text/csv'),
         "Content-Disposition": `attachment; filename=${function_name + new Date().getTime() + (function_name == 'liveview_to_geojson' ? '.geojson' : ".csv")}`,
         "is-cord-avail": function_name == 'liveview_to_geojson' ? result.isCordPresent : "false"
     }
