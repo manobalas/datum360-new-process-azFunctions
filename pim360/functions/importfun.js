@@ -77,7 +77,7 @@ const upload = function (file, some) {
                 }
                 resolve({ "writeFileSync": "file is saved" })
             });
-            resolve({ "writeFileSync": "file is saved" })
+            // resolve({ "writeFileSync": "file is saved" })
             // resolve({ "response": "test!" })
         } catch (err) {
             resolve({ "response": JSON.stringify(err) })
