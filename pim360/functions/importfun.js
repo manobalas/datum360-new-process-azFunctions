@@ -88,7 +88,7 @@ const upload = function (file, some) {
 const download = function (file, some) {
     return new Promise((resolve, reject) => {
         try {
-            resolve(fs.readFileSync('D:/local/Temp/data.json'))
+            resolve(fs.readFileSync('D:/local/Temp/sample.xlsx'))
         } catch (err) {
             resolve({ "response": err })
         }
