@@ -13,7 +13,7 @@ const upload = function (file, some) {
                 stux: new Date()
             }
             var xlsx = json2xlsx(json);
-            fs.writeFileSync('D:/local/Temp/data.xlsx', xlsx);
+            fs.writeFileSync('D:/local/Temp/data.json', xlsx);
             resolve({ "response": "test!" })
         } catch (err) {
             resolve({ "response": JSON.stringify(err) })
@@ -24,7 +24,7 @@ const upload = function (file, some) {
 const download = function (file, some) {
     return new Promise((resolve, reject) => {
         try {
-            resolve(fs.readFileSync('D:/local/Temp/data.xlsx'))
+            resolve(fs.readFileSync('D:/local/Temp/data.json'))
         } catch (err) {
             resolve({ "response": err })
         }
