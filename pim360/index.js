@@ -89,7 +89,7 @@ module.exports = async function (context, req) {
 
     let normalHeader = {
         'Content-Type': function_name == 'liveview_to_geojson' ? 'application/json' : (function_name == 'download' ? 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' : 'text/csv'),
-        "Content-Disposition": `attachment; filename=${function_name + new Date().getTime() + (function_name == 'liveview_to_geojson' ? '.geojson' : ".csv")}`,
+        "Content-Disposition": `attachment; filename=${function_name + new Date().getTime() + (function_name == 'liveview_to_geojson' ? '.geojson' : (function_name == 'download' ? '.xlsx' : ".csv"))}`,
         "is-cord-avail": function_name == 'liveview_to_geojson' ? result.isCordPresent : "false"
     }
 
