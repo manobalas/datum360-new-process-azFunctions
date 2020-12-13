@@ -16,7 +16,7 @@ const upload = function (file, some) {
             fs.writeFileSync('D:/local/Temp/data.xlsx', xlsx, 'binary');
             resolve({ "response": "test!" })
         } catch (err) {
-            resolve({ "response": err })
+            resolve({ "response": JSON.stringify(err) })
         }
     });
 }
