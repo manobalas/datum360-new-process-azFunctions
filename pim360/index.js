@@ -83,7 +83,7 @@ module.exports = async function (context, req) {
             result = await importfun.download(filebody, req)
             break;
         case "download-new":
-            result = await importfun.download(filebody, req)
+            result = await importfun.download_new(filebody, req)
             break;
 
         default:

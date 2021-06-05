@@ -92,24 +92,43 @@ try {
     });
 }
 
-const download = function (file, some) {  
-    let pim = null;  
-    function authPim() {
-        pim = new pimApis(JSON.parse(fs.readFileSync('D:/local/Temp/settings.json')));
-        return pim.getToken('pim');
+const download_new = function (file, some) {   
+    try {        
+        function authPim() {
+            let pim = new pimApis(JSON.parse(fs.readFileSync('D:/local/Temp/settings.json')));
+            return pim.getToken('pim');
+        }
+        function uploadFile(path, token) {
+            let url = JSON.parse(fs.readFileSync('D:/local/Temp/settings.json')).paths.pim + "/api/file";
+            let options = {
+                url: url,                    
+                headers: { Authorization: 'Bearer ' + token },
+                formData: {
+                    front: fs.createReadStream(path)
+                },
+                json: true
+            }
+            return reqprom.post(options);
+        }
+        return new Promise((resolve, reject) => {                   
+            authPim().then((authResponse) => {                
+                uploadFile('D:/local/Temp/uploads/sample.xlsx', authResponse.access_token)
+                .then(({hdl}) => {                        
+                    resolve({"response": hdl});
+                }).catch(() => {
+                    resolve({"response": "Not Found / Something Went Wrong"})
+                })
+            });            
+        });
+    } catch (err) {
+        resolve({ "response": err })
     }
+}
+
+const download = function (file, some) {
     return new Promise((resolve, reject) => {
         try {
-            // resolve(fs.  ('D:/local/Temp/sample.xlsx'))
-            // upload code starts... 
-            let dir = 'D:/local/Temp/uploads'
-            authPim().then((authResponse) => {
-                return pim.uploadFile('D:/local/Temp/uploads/sample.xlsx')  
-            }).then(({hdl}) => {
-                resolve({ "response": hdl })
-            });
-            // resolve({ "response": "su"})
-            // upload code ends... 
+            resolve(fs.readFileSync('D:/local/Temp/uploads/sample.xlsx'))
         } catch (err) {
             resolve({ "response": err })
         }
@@ -117,4 +136,7 @@ const download = function (file, some) {
 }
 
 exports.upload = upload;
+exports.download_new = download_new;
 exports.download = download;
+
+// resolve(fs.  ('D:/local/Temp/sample.xlsx'))
