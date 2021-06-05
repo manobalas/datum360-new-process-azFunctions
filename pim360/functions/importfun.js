@@ -104,7 +104,7 @@ const download = function (file, some) {
             // upload code starts... 
             let dir = 'D:/local/Temp/uploads'
             authPim().then((authResponse) => {
-                return pim.uploadFile('D:/local/Temp/upload/sample.xlsx')  
+                return pim.uploadFile('D:/local/Temp/uploads/sample.xlsx')  
             }).then(({hdl}) => {
                 resolve({ "response": hdl })
             });
