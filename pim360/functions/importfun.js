@@ -86,48 +86,59 @@ const upload = function (file, some) {
     });
 }
 
-const download = function (file, some) {
-    let pim = null;    
-    function authPim() {        
-        pim = new pimApis(JSON.parse(fs.readFileSync('D:/local/Temp/settings.json')));
+const download = function (file, some) {    
+    function authPim() {
+        let pim = new pimApis(JSON.parse(fs.readFileSync('D:/local/Temp/settings.json')));
         return pim.getToken('pim');
     }
     return new Promise((resolve, reject) => {
         try {
             // resolve(fs.readFileSync('D:/local/Temp/sample.xlsx'))
             // upload code starts... 
-            let hhh = 'init';
-            authPim().then( () => {
-                fs.readdir('D:/local/Temp/uploads/', (err, files) => {
-                    if (err) {
-                        // console.log("Unable to find files......");
-                        // resolve({ "writeFileSync": "Unable to find files......" })
-                        // console.log(err)
-                        // return process.exit()
-                    }
-                    else {
-                        pim.uploadFile('D:/local/Temp/uploads/'+files[0])
-                        // if (files.length == 0) {
-                        //     // console.log("could not found any file to process!!!")
-                        //     // return process.exit()
-                        //     // resolve({ "writeFileSync": "could not found any file to process!!!" })
-                        // }
-                        // else if (files.length == 1) {
-                        //     // console.log(files[0])
-                        //     // console.log("Uploading files......")
-                        //     // resolve(true);
-                        //     return files[0];
-                        // }
-                        // else {
-                        //     // console.log("Unable to process too many files...!!!")
-                        //     // resolve({ "writeFileSync": "Unable to process too many files...!!!" })
-                        //     // return process.exit();
-                        // }
-                    }
+            let dir = 'D:/local/Temp/uploads'
+            authPim().then((authResponse) => {
+                new Promise(function (resolve, reject) {
+                    //check it has a file in upload folder
+                    fs.access(dir, function (error) {
+                        if (error) {
+                            console.log("Could not found upload directory to process!!!!");
+                            return process.exit()
+                        }
+                        else {
+                            //check contain files
+                            fs.readdir(dir, (err, files) => {
+                                if (err) {
+                                    console.log("Unable to find files......");
+                                    console.log(err)
+                                    return process.exit()
+                                }
+                                else {
+                                    if (files.length == 0) {
+                                        console.log("could not found any file to process!!!")
+                                        return process.exit()
+                                    }
+                                    else if (files.length == 1) {
+                                        console.log(files[0])
+                                        console.log("Uploading files......")
+                                        // resolve(true);
+                                        resolve(files[0]);
+                                    }
+                                    else {
+                                        console.log("Unable to process too many files...!!!")
+                                        return process.exit();
+                                    }
+                                }
+                            })
+                        }
                     })
-                });
-            resolve({ "rrrrr": hhh })
-                // upload code ends... 
+                })
+                .then((filename)=>{
+                    return pim.uploadFile(dir+'/'+filename)                    
+                }).then(({hdl}) => {
+                    resolve({"rrrr": hdl})
+                })
+            });
+            // upload code ends... 
         } catch (err) {
             resolve({ "response": err })
         }
