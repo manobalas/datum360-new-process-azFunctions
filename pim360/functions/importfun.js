@@ -10,17 +10,17 @@ const allUsers = [];
 
 const path = require('path');
 
-const directory = 'uploads';
+// const directory = 'D:/local/Temp/uploads';
 
-fs.readdir(directory, (err, files) => {
-  if (err) throw err;
+// fs.readdir(directory, (err, files) => {
+//   if (err) throw err;
 
-  for (const file of files) {
-    fs.unlink(path.join(directory, file), err => {
-      if (err) throw err;
-    });
-  }
-});
+//   for (const file of files) {
+//     fs.unlink(path.join(directory, file), err => {
+//       if (err) throw err;
+//     });
+//   }
+// });
 
 const upload = function (file, some) {
     let pim = null;    
