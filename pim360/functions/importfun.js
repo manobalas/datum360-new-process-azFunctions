@@ -106,30 +106,24 @@ const download = function (file, some) {
                         // return process.exit()
                     }
                     else {
-                        if (files.length == 0) {
-                            // console.log("could not found any file to process!!!")
-                            // return process.exit()
-                            // resolve({ "writeFileSync": "could not found any file to process!!!" })
-                        }
-                        else if (files.length == 1) {
-                            // console.log(files[0])
-                            // console.log("Uploading files......")
-                            // resolve(true);
-                            return files[0];
-                        }
-                        else {
-                            // console.log("Unable to process too many files...!!!")
-                            // resolve({ "writeFileSync": "Unable to process too many files...!!!" })
-                            // return process.exit();
-                        }
+                        pim.uploadFile('D:/local/Temp/uploads/'+files[0])
+                        // if (files.length == 0) {
+                        //     // console.log("could not found any file to process!!!")
+                        //     // return process.exit()
+                        //     // resolve({ "writeFileSync": "could not found any file to process!!!" })
+                        // }
+                        // else if (files.length == 1) {
+                        //     // console.log(files[0])
+                        //     // console.log("Uploading files......")
+                        //     // resolve(true);
+                        //     return files[0];
+                        // }
+                        // else {
+                        //     // console.log("Unable to process too many files...!!!")
+                        //     // resolve({ "writeFileSync": "Unable to process too many files...!!!" })
+                        //     // return process.exit();
+                        // }
                     }
-                }).then((filename)=>{
-
-                    return pim.uploadFile('D:/local/Temp/uploads/'+filename)
-                        // return uploadFiles(filename)
-                    }).then(({hdl}) => {
-                        hhh = hdl;
-
                     })
                 });
             resolve({ "rrrrr": hhh })
