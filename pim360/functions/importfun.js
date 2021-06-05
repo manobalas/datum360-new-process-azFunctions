@@ -65,7 +65,7 @@ const upload = function (file, some) {
                             // console.log(files[0])
                             // console.log("Uploading files......")
                             // resolve(true);
-                            resolve(files[0]);
+                            return files[0];
                         }
                         else {
                             // console.log("Unable to process too many files...!!!")
