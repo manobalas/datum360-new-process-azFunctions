@@ -115,8 +115,8 @@ const download_new = function (file, some) {
                 uploadFile('D:/local/Temp/uploads/sample.xlsx', authResponse.access_token)
                 .then(({hdl}) => {                        
                     resolve({"response": hdl});
-                }).catch(() => {
-                    resolve({"response": "Not Found / Something Went Wrong"})
+                }).catch((err) => {
+                    resolve({"response": err})
                 })
             });            
         });
