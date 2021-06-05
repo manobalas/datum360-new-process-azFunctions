@@ -5,56 +5,76 @@ const json2xlsx = require('node-json-xlsx');
 var json2xls = require('json2xls');
 const fs = require('fs');
 
-const allUsers = [
-    {
-        "firstName": "Shubham",
-        "lastName": "Verma",
-        "email": "example@gmail.com",
-        "Mob:": 1234567890,
-        "country": "India"
-    },
-    {
-        "firstName": "Shubham",
-        "lastName": "Verma",
-        "email": "example@gmail.com",
-        "Mob:": 1234567890,
-        "country": "India"
-    },
-    {
-        "firstName": "Shubham",
-        "lastName": "Verma",
-        "email": "example@gmail.com",
-        "Mob:": 1234567890,
-        "country": "India"
-    },
-    {
-        "firstName": "Shubham",
-        "lastName": "Verma",
-        "email": "example@gmail.com",
-        "Mob:": 1234567890,
-        "country": "India"
-    },
-    {
-        "firstName": "Shubham",
-        "lastName": "Verma",
-        "email": "example@gmail.com",
-        "Mob:": 1234567890,
-        "country": "India"
-    },
-    {
-        "firstName": "Shubham",
-        "lastName": "Verma",
-        "email": "example@gmail.com",
-        "Mob:": 1234567890,
-        "country": "India"
-    },
-    {
-        "firstName": "Shubham",
-        "lastName": "Verma",
-        "email": "example@gmail.com",
-        "Mob:": 1234567890,
-        "country": "India"
-    }
+const allUsers = 
+[
+{"ASSET":"MCC","TAG NUMBER":"MCC-10-P-501","CLASS NAME":"PUMP","DESCRIPTION":"Tag description - MCC-10-P-501","SYSTEM":"10","LOCATION":"S901"},
+{"ASSET":"MCC","TAG NUMBER":"MCC-10-P-510","CLASS NAME":"PUMP","DESCRIPTION":"","SYSTEM":"10","LOCATION":""},
+{"ASSET":"MCC","TAG NUMBER":"MCC-10-P-511","CLASS NAME":"PUMP","DESCRIPTION":"","SYSTEM":"10","LOCATION":""},
+{"ASSET":"MCC","TAG NUMBER":"MCC-10-P-512","CLASS NAME":"PUMP","DESCRIPTION":"","SYSTEM":"10","LOCATION":""},
+{"ASSET":"MCC","TAG NUMBER":"MCC-10-P-513","CLASS NAME":"PUMP","DESCRIPTION":"","SYSTEM":"10","LOCATION":""},
+{"ASSET":"MCC","TAG NUMBER":"MCC-10-P-514","CLASS NAME":"PUMP","DESCRIPTION":"","SYSTEM":"10","LOCATION":""},
+{"ASSET":"MCC","TAG NUMBER":"MCC-10-P-515","CLASS NAME":"PUMP","DESCRIPTION":"","SYSTEM":"10","LOCATION":""},
+{"ASSET":"MCC","TAG NUMBER":"MCC-10-P-516","CLASS NAME":"PUMP","DESCRIPTION":"","SYSTEM":"10","LOCATION":""},
+{"ASSET":"MCC","TAG NUMBER":"MCC-50-PX-510","CLASS NAME":"PUMP","DESCRIPTION":"Tag description - MCC-50-PX-510","SYSTEM":"50","LOCATION":"S101"},
+{"ASSET":"MCC","TAG NUMBER":"MCC-56-PX-510","CLASS NAME":"PUMP","DESCRIPTION":"Tag description - MCC-56-PX-510","SYSTEM":"97","LOCATION":"S901"},
+{"ASSET":"MCC","TAG NUMBER":"MCC-56-PX-511","CLASS NAME":"PUMP","DESCRIPTION":"Tag description - MCC-56-PX-511","SYSTEM":"97","LOCATION":"S901"},
+{"ASSET":"MCC","TAG NUMBER":"MCC-56-PX-530","CLASS NAME":"PUMP","DESCRIPTION":"Tag description - MCC-56-PX-530","SYSTEM":"97","LOCATION":"S101"},
+{"ASSET":"MCC","TAG NUMBER":"MCC-56-PX-531","CLASS NAME":"PUMP","DESCRIPTION":"Tag description - MCC-56-PX-531","SYSTEM":"97","LOCATION":"S101"},
+{"ASSET":"MCC","TAG NUMBER":"MCC-58-PX-501","CLASS NAME":"PUMP","DESCRIPTION":"Tag description - MCC-58-PX-501","SYSTEM":"58","LOCATION":"S903"},
+{"ASSET":"MCC","TAG NUMBER":"MCC-58-PX-502","CLASS NAME":"PUMP","DESCRIPTION":"Tag description - MCC-58-PX-502","SYSTEM":"58","LOCATION":"S901"},
+{"ASSET":"MCC","TAG NUMBER":"MCC-58-PX-503","CLASS NAME":"PUMP","DESCRIPTION":"Tag description - MCC-58-PX-503","SYSTEM":"58","LOCATION":"S103"},
+{"ASSET":"MCC","TAG NUMBER":"MCC-58-PX-504","CLASS NAME":"PUMP","DESCRIPTION":"Tag description - MCC-58-PX-504","SYSTEM":"58","LOCATION":"S103"},
+{"ASSET":"MCC","TAG NUMBER":"MCC-58-PX-512","CLASS NAME":"PUMP","DESCRIPTION":"Tag description - MCC-58-PX-512","SYSTEM":"58","LOCATION":"S100"},
+{"ASSET":"MCC","TAG NUMBER":"MCC-58-PX-522","CLASS NAME":"PUMP","DESCRIPTION":"Tag description - MCC-58-PX-522","SYSTEM":"58","LOCATION":"S900"},
+{"ASSET":"MCC","TAG NUMBER":"MCC-58-PX-532","CLASS NAME":"PUMP","DESCRIPTION":"Tag description - MCC-58-PX-532","SYSTEM":"58","LOCATION":"S100"},
+{"ASSET":"MCC","TAG NUMBER":"MCC-58-PX-542","CLASS NAME":"PUMP","DESCRIPTION":"Tag description - MCC-58-PX-542","SYSTEM":"58","LOCATION":"S100"},
+{"ASSET":"MCC","TAG NUMBER":"MCC-58-PX-552","CLASS NAME":"PUMP","DESCRIPTION":"Tag description - MCC-58-PX-552","SYSTEM":"58","LOCATION":"S100"},
+{"ASSET":"MCC","TAG NUMBER":"MCC-65-PX-500","CLASS NAME":"PUMP","DESCRIPTION":"Tag description - MCC-65-PX-500","SYSTEM":"97","LOCATION":"S104"},
+{"ASSET":"MCC","TAG NUMBER":"MCC-65-PX-501","CLASS NAME":"PUMP","DESCRIPTION":"Tag description - MCC-65-PX-501","SYSTEM":"97","LOCATION":"S104"},
+{"ASSET":"MCC","TAG NUMBER":"MCC-65-PX-505","CLASS NAME":"PUMP","DESCRIPTION":"Tag description - MCC-65-PX-505","SYSTEM":"97","LOCATION":"S105"},
+{"ASSET":"MCC","TAG NUMBER":"MCC-65-PX-510","CLASS NAME":"PUMP","DESCRIPTION":"Tag description - MCC-65-PX-510","SYSTEM":"65","LOCATION":"P100"},
+{"ASSET":"MCC","TAG NUMBER":"MCC-65-PX-512","CLASS NAME":"PUMP","DESCRIPTION":"Tag description - MCC-65-PX-512","SYSTEM":"65","LOCATION":"S104"},
+{"ASSET":"MCC","TAG NUMBER":"MCC-65-PX-513","CLASS NAME":"PUMP","DESCRIPTION":"Tag description - MCC-65-PX-513","SYSTEM":"65","LOCATION":"S104"},
+{"ASSET":"MCC","TAG NUMBER":"MCC-65-PX-514","CLASS NAME":"PUMP","DESCRIPTION":"Tag description - MCC-65-PX-514","SYSTEM":"65","LOCATION":"S104"},
+{"ASSET":"MCC","TAG NUMBER":"MCC-65-PX-515","CLASS NAME":"PUMP","DESCRIPTION":"Tag description - MCC-65-PX-515","SYSTEM":"65","LOCATION":"S104"},
+{"ASSET":"MCC","TAG NUMBER":"MCC-65-PX-516","CLASS NAME":"PUMP","DESCRIPTION":"Tag description - MCC-65-PX-516","SYSTEM":"65","LOCATION":"S104"},
+{"ASSET":"MCC","TAG NUMBER":"MCC-65-PX-517","CLASS NAME":"PUMP","DESCRIPTION":"Tag description - MCC-65-PX-517","SYSTEM":"65","LOCATION":"S104"},
+{"ASSET":"MCC","TAG NUMBER":"MCC-65-PX-518","CLASS NAME":"PUMP","DESCRIPTION":"Tag description - MCC-65-PX-518","SYSTEM":"65","LOCATION":"S104"},
+{"ASSET":"MCC","TAG NUMBER":"MCC-65-PX-519","CLASS NAME":"PUMP","DESCRIPTION":"Tag description - MCC-65-PX-519","SYSTEM":"65","LOCATION":"S104"},
+{"ASSET":"MCC","TAG NUMBER":"MCC-65-PX-520","CLASS NAME":"PUMP","DESCRIPTION":"Tag description - MCC-65-PX-520","SYSTEM":"65","LOCATION":"S104"},
+{"ASSET":"MCC","TAG NUMBER":"MCC-65-PX-521","CLASS NAME":"PUMP","DESCRIPTION":"Tag description - MCC-65-PX-521","SYSTEM":"65","LOCATION":"S104"},
+{"ASSET":"MCC","TAG NUMBER":"MCC-65-PX-530A","CLASS NAME":"PUMP","DESCRIPTION":"Tag description - MCC-65-PX-530A","SYSTEM":"65","LOCATION":"S105"},
+{"ASSET":"MCC","TAG NUMBER":"MCC-65-PX-530B","CLASS NAME":"PUMP","DESCRIPTION":"Tag description - MCC-65-PX-530B","SYSTEM":"65","LOCATION":"S105"},
+{"ASSET":"MCC","TAG NUMBER":"MCC-65-PX-601","CLASS NAME":"PUMP","DESCRIPTION":"Tag description - MCC-65-PX-601","SYSTEM":"65","LOCATION":"T757"},
+{"ASSET":"MCC","TAG NUMBER":"MCC-66-PX-505A","CLASS NAME":"PUMP","DESCRIPTION":"Tag description - MCC-66-PX-505A","SYSTEM":"66","LOCATION":"S902"},
+{"ASSET":"MCC","TAG NUMBER":"MCC-66-PX-505B","CLASS NAME":"PUMP","DESCRIPTION":"Tag description - MCC-66-PX-505B","SYSTEM":"66","LOCATION":"S902"},
+{"ASSET":"MCC","TAG NUMBER":"MCC-68-PX-602A","CLASS NAME":"PUMP","DESCRIPTION":"Tag description - MCC-68-PX-602A","SYSTEM":"68","LOCATION":"T751"},
+{"ASSET":"MCC","TAG NUMBER":"MCC-68-PX-602B","CLASS NAME":"PUMP","DESCRIPTION":"Tag description - MCC-68-PX-602B","SYSTEM":"68","LOCATION":"T751"},
+{"ASSET":"MCC","TAG NUMBER":"MCC-70-PX-510","CLASS NAME":"PUMP","DESCRIPTION":"Tag description - MCC-70-PX-510","SYSTEM":"70","LOCATION":"L901"},
+{"ASSET":"MCC","TAG NUMBER":"MCC-70-PX-520","CLASS NAME":"PUMP","DESCRIPTION":"Tag description - MCC-70-PX-520","SYSTEM":"70","LOCATION":"L901"},
+{"ASSET":"MCC","TAG NUMBER":"MCC-70-PX-530","CLASS NAME":"PUMP","DESCRIPTION":"Tag description - MCC-70-PX-530","SYSTEM":"70","LOCATION":"L901"},
+{"ASSET":"MCC","TAG NUMBER":"MCC-70-PX-540","CLASS NAME":"PUMP","DESCRIPTION":"Tag description - MCC-70-PX-540","SYSTEM":"70","LOCATION":"P100"},
+{"ASSET":"MCC","TAG NUMBER":"MCC-70-PX-550","CLASS NAME":"PUMP","DESCRIPTION":"Tag description - MCC-70-PX-550","SYSTEM":"70","LOCATION":"P100"},
+{"ASSET":"MCC","TAG NUMBER":"MCC-73-PX-510","CLASS NAME":"PUMP","DESCRIPTION":"Tag description - MCC-73-PX-510","SYSTEM":"73","LOCATION":"S107"},
+{"ASSET":"MCC","TAG NUMBER":"MCC-73-PX-520","CLASS NAME":"PUMP","DESCRIPTION":"Tag description - MCC-73-PX-520","SYSTEM":"73","LOCATION":"S107"},
+{"ASSET":"MCC","TAG NUMBER":"MCC-76-PX-501","CLASS NAME":"PUMP","DESCRIPTION":"Tag description - MCC-76-PX-501","SYSTEM":"76","LOCATION":"L904"},
+{"ASSET":"MCC","TAG NUMBER":"MCC-76-PX-502","CLASS NAME":"PUMP","DESCRIPTION":"Tag description - MCC-76-PX-502","SYSTEM":"76","LOCATION":"L904"},
+{"ASSET":"MCC","TAG NUMBER":"MCC-76-PX-503","CLASS NAME":"PUMP","DESCRIPTION":"Tag description - MCC-76-PX-503","SYSTEM":"76","LOCATION":"S105"},
+{"ASSET":"MCC","TAG NUMBER":"MCC-80-PX-150","CLASS NAME":"PUMP","DESCRIPTION":"Tag description - MCC-80-PX-150","SYSTEM":"80","LOCATION":"U800"},
+{"ASSET":"MCC","TAG NUMBER":"MCC-80-PX-250","CLASS NAME":"PUMP","DESCRIPTION":"Tag description - MCC-80-PX-250","SYSTEM":"80","LOCATION":"U800"},
+{"ASSET":"MCC","TAG NUMBER":"MCC-80-PX-350","CLASS NAME":"PUMP","DESCRIPTION":"Tag description - MCC-80-PX-350","SYSTEM":"80","LOCATION":"U800"},
+{"ASSET":"MCC","TAG NUMBER":"MCC-80-PX-450","CLASS NAME":"PUMP","DESCRIPTION":"Tag description - MCC-80-PX-450","SYSTEM":"80","LOCATION":"U800"},
+{"ASSET":"MCC","TAG NUMBER":"MCC-84-PX-501","CLASS NAME":"PUMP","DESCRIPTION":"Tag description - MCC-84-PX-501","SYSTEM":"84","LOCATION":"L901"},
+{"ASSET":"MCC","TAG NUMBER":"MCC-84-PX-502","CLASS NAME":"PUMP","DESCRIPTION":"Tag description - MCC-84-PX-502","SYSTEM":"84","LOCATION":"L901"},
+{"ASSET":"MCC","TAG NUMBER":"MCC-84-PX-530","CLASS NAME":"PUMP","DESCRIPTION":"Tag description - MCC-84-PX-530","SYSTEM":"84","LOCATION":"L901"},
+{"ASSET":"MCC","TAG NUMBER":"MCC-97-PX-510","CLASS NAME":"PUMP","DESCRIPTION":"Tag description - MCC-97-PX-510","SYSTEM":"97","LOCATION":"L902"},
+{"ASSET":"MCC","TAG NUMBER":"MCC-97-PX-520","CLASS NAME":"PUMP","DESCRIPTION":"Tag description - MCC-97-PX-520","SYSTEM":"97","LOCATION":"L902"},
+{"ASSET":"MCC","TAG NUMBER":"MCC-P-0101A","CLASS NAME":"PUMP","DESCRIPTION":"Tag Description - MCC-P-0101A","SYSTEM":"3","LOCATION":""},
+{"ASSET":"MCC","TAG NUMBER":"MCC-P-0101B","CLASS NAME":"PUMP","DESCRIPTION":"Tag Description - MCC-P-0101B","SYSTEM":"3","LOCATION":""},
+{"ASSET":"MCC","TAG NUMBER":"MCC-P-0102A","CLASS NAME":"PUMP","DESCRIPTION":"Tag Description - MCC-P-0102A","SYSTEM":"3","LOCATION":""},
+{"ASSET":"MCC","TAG NUMBER":"MCC-P-0102B","CLASS NAME":"PUMP","DESCRIPTION":"Tag Description - MCC-P-0102B","SYSTEM":"3","LOCATION":""},
+{"ASSET":"MCC","TAG NUMBER":"MCC-P-1003","CLASS NAME":"PUMP","DESCRIPTION":"Tag Description - MCC-P-1003","SYSTEM":"86","LOCATION":""},
+{"ASSET":"MCC","TAG NUMBER":"MCC-P-1004","CLASS NAME":"PUMP","DESCRIPTION":"Tag Description - MCC-P-1004","SYSTEM":"86","LOCATION":""}
 ];
 
 const upload = function (file, some) {
