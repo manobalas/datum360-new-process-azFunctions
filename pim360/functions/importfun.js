@@ -6,7 +6,13 @@ var json2xls = require('json2xls');
 const pimApis = require("../api/api-pim360");
 const fs = require('fs');
 
-const allUsers = [];
+const allUsers = [{
+        "firstName": "Shubham",
+        "lastName": "Verma",
+        "email": "example@gmail.com",
+        "Mob:": 1234567890,
+        "country": "India"
+    }];
 
 const path = require('path');
 
