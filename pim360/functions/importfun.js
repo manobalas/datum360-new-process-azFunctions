@@ -28,17 +28,17 @@ const path = require('path');
 //   }
 // });
 
-var dir = 'D:/local/Temp/uploads';
-try {
-  fs.mkdirSync(dir);
-} catch(e) {
-  // if (e.code != 'EEXIST') throw e;
-}
 
 const upload = function (file, some) {
     
     return new Promise((resolve, reject) => {
         try {
+            var dir = 'D:/local/Temp/uploads';
+try {
+  fs.mkdirSync(dir);
+} catch(e) {
+  // if (e.code != 'EEXIST') throw e;
+}
             const filename = 'D:/local/Temp/uploads/sample.xlsx';
                 var xls = json2xls(allUsers);
                 fs.writeFileSync(filename, xls, 'binary', (err) => {
