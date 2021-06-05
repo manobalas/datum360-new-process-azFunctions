@@ -6,102 +6,45 @@ var json2xls = require('json2xls');
 const pimApis = require("../api/api-pim360");
 const fs = require('fs');
 
-const allUsers = [{
-        "firstName": "Shubham",
-        "lastName": "Verma",
-        "email": "example@gmail.com",
-        "Mob:": 1234567890,
-        "country": "India"
-    }];
+const allUsers = [];
 
 const path = require('path');
 
-// const directory = 'D:/local/Temp/uploads';
-
-// fs.readdir(directory, (err, files) => {
-//   if (err) throw err;
-
-//   for (const file of files) {
-//     fs.unlink(path.join(directory, file), err => {
-//       if (err) throw err;
-//     });
-//   }
-// });
-
-
-const upload = function (file, some) {
-    
+const upload = function(file, some) {
     return new Promise((resolve, reject) => {
         try {
             var dir = 'D:/local/Temp/uploads';
-try {
-  fs.mkdirSync(dir);
-} catch(e) {
-  // if (e.code != 'EEXIST') throw e;
-}
+            try {
+                fs.mkdirSync(dir);
+            } catch (e) {
+                // if (e.code != 'EEXIST') throw e;
+            }
             const filename = 'D:/local/Temp/uploads/sample.xlsx';
-                var xls = json2xls(allUsers);
-                fs.writeFileSync(filename, xls, 'binary', (err) => {
-                    if (err) {
-                        resolve({ "writeFileSync": err })
-                    }
-                    resolve({ "writeFileSync": "file is saved" })
-                });
+            var xls = json2xls(allUsers);
+            fs.writeFileSync(filename, xls, 'binary', (err) => {
+                if (err) {
+                    resolve({ "writeFileSync": err })
+                }
                 resolve({ "writeFileSync": "file is saved" })
-            // authPim().then( () => {
-                
-                // // upload code starts... 
-                // fs.readdir('D:/local/Temp/uploads/', (err, files) => {
-                //     if (err) {
-                //         // console.log("Unable to find files......");
-                //         resolve({ "writeFileSync": "Unable to find files......" })
-                //         // console.log(err)
-                //         // return process.exit()
-                //     }
-                //     else {
-                //         if (files.length == 0) {
-                //             // console.log("could not found any file to process!!!")
-                //             // return process.exit()
-                //             resolve({ "writeFileSync": "could not found any file to process!!!" })
-                //         }
-                //         else if (files.length == 1) {
-                //             // console.log(files[0])
-                //             // console.log("Uploading files......")
-                //             // resolve(true);
-                //             return files[0];
-                //         }
-                //         else {
-                //             // console.log("Unable to process too many files...!!!")
-                //             resolve({ "writeFileSync": "Unable to process too many files...!!!" })
-                //             // return process.exit();
-                //         }
-                //     }
-                // }).then((filename)=>{
-
-                //     return pim.uploadFile('D:/local/Temp/uploads/'+filename)
-                //         // return uploadFiles(filename)
-                //     }).then(({hdl}) => {
-                //         resolve({ "writeFileSync": hdl })
-
-                //     })
-                // // upload code ends... 
-            // })
+            });
+            resolve({ "writeFileSync": "file is saved" })
         } catch (err) {
             resolve({ "response": JSON.stringify(err) })
         }
     });
 }
 
-const download_new = function (file, some) {   
-    try {        
+const download_new = function(file, some) {
+    try {
         function authPim() {
             let pim = new pimApis(JSON.parse(fs.readFileSync('D:/local/Temp/settings.json')));
             return pim.getToken('pim');
         }
+
         function uploadFile(path, token) {
             let url = JSON.parse(fs.readFileSync('D:/local/Temp/settings.json')).paths.pim + "api/file";
             let options = {
-                url: url,                    
+                url: url,
                 headers: { Authorization: 'Bearer ' + token },
                 formData: {
                     front: fs.createReadStream(path)
@@ -110,22 +53,22 @@ const download_new = function (file, some) {
             }
             return reqprom.post(options);
         }
-        return new Promise((resolve, reject) => {                   
-            authPim().then((authResponse) => {                
+        return new Promise((resolve, reject) => {
+            authPim().then((authResponse) => {
                 uploadFile('D:/local/Temp/uploads/sample.xlsx', authResponse.access_token)
-                .then(({Hdl}) => {                        
-                    resolve({"response": Hdl});
-                }).catch((err) => {
-                    resolve({"response": err})
-                })
-            });            
+                    .then(({ Hdl }) => {
+                        resolve({ "response": Hdl });
+                    }).catch((err) => {
+                        resolve({ "response": err })
+                    })
+            });
         });
     } catch (err) {
         resolve({ "response": err })
     }
 }
 
-const download = function (file, some) {
+const download = function(file, some) {
     return new Promise((resolve, reject) => {
         try {
             resolve(fs.readFileSync('D:/local/Temp/uploads/sample.xlsx'))
