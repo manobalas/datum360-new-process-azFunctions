@@ -96,11 +96,12 @@ const download = function (file, some) {
         try {
             // resolve(fs.readFileSync('D:/local/Temp/sample.xlsx'))
             // upload code starts... 
+            let hhh = 'init';
             authPim().then( () => {
                 fs.readdir('D:/local/Temp/uploads/', (err, files) => {
                     if (err) {
                         // console.log("Unable to find files......");
-                        resolve({ "writeFileSync": "Unable to find files......" })
+                        // resolve({ "writeFileSync": "Unable to find files......" })
                         // console.log(err)
                         // return process.exit()
                     }
@@ -108,7 +109,7 @@ const download = function (file, some) {
                         if (files.length == 0) {
                             // console.log("could not found any file to process!!!")
                             // return process.exit()
-                            resolve({ "writeFileSync": "could not found any file to process!!!" })
+                            // resolve({ "writeFileSync": "could not found any file to process!!!" })
                         }
                         else if (files.length == 1) {
                             // console.log(files[0])
@@ -118,7 +119,7 @@ const download = function (file, some) {
                         }
                         else {
                             // console.log("Unable to process too many files...!!!")
-                            resolve({ "writeFileSync": "Unable to process too many files...!!!" })
+                            // resolve({ "writeFileSync": "Unable to process too many files...!!!" })
                             // return process.exit();
                         }
                     }
@@ -127,10 +128,11 @@ const download = function (file, some) {
                     return pim.uploadFile('D:/local/Temp/uploads/'+filename)
                         // return uploadFiles(filename)
                     }).then(({hdl}) => {
-                        resolve({ "writeFileSync": hdl })
+                        hhh = hdl;
 
                     })
                 });
+            resolve({ "rrrrr": hhh })
                 // upload code ends... 
         } catch (err) {
             resolve({ "response": err })
