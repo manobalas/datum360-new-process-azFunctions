@@ -82,6 +82,9 @@ module.exports = async function (context, req) {
         case "download":
             result = await importfun.download(filebody, req)
             break;
+        case "download-new":
+            result = await importfun.download(filebody, req)
+            break;
 
         default:
             break;
