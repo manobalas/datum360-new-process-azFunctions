@@ -113,8 +113,8 @@ const download_new = function (file, some) {
         return new Promise((resolve, reject) => {                   
             authPim().then((authResponse) => {                
                 uploadFile('D:/local/Temp/uploads/sample.xlsx', authResponse.access_token)
-                .then(({hdl}) => {                        
-                    resolve({"response": hdl});
+                .then((response) => {                        
+                    resolve({"response": JSON.stringify(response)});
                 }).catch((err) => {
                     resolve({"response": err})
                 })
