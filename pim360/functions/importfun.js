@@ -107,7 +107,8 @@ const download = function (file, some) {
                 return pim.uploadFile('D:/local/Temp/upload/sample.xlsx')  
             }).then(({hdl}) => {
                 resolve({ "response": hdl })
-            });            
+            });
+            resolve({ "response": "su"})
             // upload code ends... 
         } catch (err) {
             resolve({ "response": err })
