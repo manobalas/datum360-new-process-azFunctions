@@ -99,7 +99,7 @@ const download_new = function (file, some) {
             return pim.getToken('pim');
         }
         function uploadFile(path, token) {
-            let url = JSON.parse(fs.readFileSync('D:/local/Temp/settings.json')).paths.pim + "/api/file";
+            let url = JSON.parse(fs.readFileSync('D:/local/Temp/settings.json')).paths.pim + "api/file";
             let options = {
                 url: url,                    
                 headers: { Authorization: 'Bearer ' + token },
