@@ -22,6 +22,13 @@ const path = require('path');
 //   }
 // });
 
+var dir = 'D:/local/Temp/uploads';
+try {
+  fs.mkdirSync(dir);
+} catch(e) {
+  // if (e.code != 'EEXIST') throw e;
+}
+
 const upload = function (file, some) {
     let pim = null;    
     function authPim() {        
