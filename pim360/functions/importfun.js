@@ -3,6 +3,7 @@ const reqprom = require('request-promise');
 const json2csv = require("json2csv").parse;
 const json2xlsx = require('node-json-xlsx');
 var json2xls = require('json2xls');
+const pimApis = require("../api/api-pim360");
 const fs = require('fs');
 
 const allUsers = [];
