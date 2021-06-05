@@ -25,13 +25,14 @@ const upload = function (file, some) {
                     }
                     resolve({ "writeFileSync": "file is saved" })
                 });
-                resolve({ "writeFileSync": "file is saved" })
+                // resolve({ "writeFileSync": "file is saved" })
                 // upload code starts... 
                 fs.readdir('D:/local/Temp/', (err, files) => {
                     if (err) {
-                        console.log("Unable to find files......");
-                        console.log(err)
-                        return process.exit()
+                        // console.log("Unable to find files......");
+                        resolve({ "writeFileSync": "Unable to find files......" })
+                        // console.log(err)
+                        // return process.exit()
                     }
                     else {
                         if (files.length == 0) {
