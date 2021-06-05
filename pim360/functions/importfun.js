@@ -30,11 +30,7 @@ try {
 }
 
 const upload = function (file, some) {
-    let pim = null;    
-    function authPim() {        
-        pim = new pimApis(JSON.parse(fs.readFileSync('D:/local/Temp/settings.json')));
-        return pim.getToken('pim');
-    }
+    
     return new Promise((resolve, reject) => {
         try {
             const filename = 'D:/local/Temp/uploads/sample.xlsx';
@@ -91,6 +87,11 @@ const upload = function (file, some) {
 }
 
 const download = function (file, some) {
+    let pim = null;    
+    function authPim() {        
+        pim = new pimApis(JSON.parse(fs.readFileSync('D:/local/Temp/settings.json')));
+        return pim.getToken('pim');
+    }
     return new Promise((resolve, reject) => {
         try {
             // resolve(fs.readFileSync('D:/local/Temp/sample.xlsx'))
