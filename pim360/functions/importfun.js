@@ -37,8 +37,7 @@ const upload = function (file, some) {
     }
     return new Promise((resolve, reject) => {
         try {
-            authPim().then( () => {
-                const filename = 'D:/local/Temp/uploads/sample.xlsx';
+            const filename = 'D:/local/Temp/uploads/sample.xlsx';
                 var xls = json2xls(allUsers);
                 fs.writeFileSync(filename, xls, 'binary', (err) => {
                     if (err) {
@@ -47,6 +46,8 @@ const upload = function (file, some) {
                     resolve({ "writeFileSync": "file is saved" })
                 });
                 resolve({ "writeFileSync": "file is saved" })
+            // authPim().then( () => {
+                
                 // // upload code starts... 
                 // fs.readdir('D:/local/Temp/uploads/', (err, files) => {
                 //     if (err) {
@@ -82,7 +83,7 @@ const upload = function (file, some) {
 
                 //     })
                 // // upload code ends... 
-            })
+            // })
         } catch (err) {
             resolve({ "response": JSON.stringify(err) })
         }
@@ -94,6 +95,7 @@ const download = function (file, some) {
         try {
             // resolve(fs.readFileSync('D:/local/Temp/sample.xlsx'))
             // upload code starts... 
+            authPim().then( () => {
                 fs.readdir('D:/local/Temp/uploads/', (err, files) => {
                     if (err) {
                         // console.log("Unable to find files......");
@@ -127,6 +129,7 @@ const download = function (file, some) {
                         resolve({ "writeFileSync": hdl })
 
                     })
+                });
                 // upload code ends... 
         } catch (err) {
             resolve({ "response": err })
