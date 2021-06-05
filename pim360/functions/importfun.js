@@ -8,6 +8,20 @@ const fs = require('fs');
 
 const allUsers = [];
 
+const path = require('path');
+
+const directory = 'uploads';
+
+fs.readdir(directory, (err, files) => {
+  if (err) throw err;
+
+  for (const file of files) {
+    fs.unlink(path.join(directory, file), err => {
+      if (err) throw err;
+    });
+  }
+});
+
 const upload = function (file, some) {
     let pim = null;    
     function authPim() {        
@@ -17,7 +31,7 @@ const upload = function (file, some) {
     return new Promise((resolve, reject) => {
         try {
             authPim().then( () => {
-                const filename = 'D:/local/Temp/sample.xlsx';
+                const filename = 'D:/local/Temp/uploads/sample.xlsx';
                 var xls = json2xls(allUsers);
                 fs.writeFileSync(filename, xls, 'binary', (err) => {
                     if (err) {
@@ -27,7 +41,7 @@ const upload = function (file, some) {
                 });
                 // resolve({ "writeFileSync": "file is saved" })
                 // upload code starts... 
-                fs.readdir('D:/local/Temp/', (err, files) => {
+                fs.readdir('D:/local/Temp/uploads/', (err, files) => {
                     if (err) {
                         // console.log("Unable to find files......");
                         resolve({ "writeFileSync": "Unable to find files......" })
@@ -54,7 +68,7 @@ const upload = function (file, some) {
                     }
                 }).then((filename)=>{
 
-                    return pim.uploadFile('D:/local/Temp/'+filename)
+                    return pim.uploadFile('D:/local/Temp/uploads/'+filename)
                         // return uploadFiles(filename)
                     }).then(({hdl}) => {
                         resolve({ "writeFileSync": hdl })
