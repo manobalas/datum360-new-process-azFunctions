@@ -108,7 +108,7 @@ const download = function (file, some) {
             }).then(({hdl}) => {
                 resolve({ "response": hdl })
             });
-            resolve({ "response": "su"})
+            // resolve({ "response": "su"})
             // upload code ends... 
         } catch (err) {
             resolve({ "response": err })
