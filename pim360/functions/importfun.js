@@ -104,12 +104,12 @@ const updateFinal = function(fileHDL) {
         };
         // dataparams.params.inputfile = fileHDL;
 
-        function updateFinalObj(authResponse) {
+        function updateFinalObj(access_token) {
             let url = JSON.parse(fs.readFileSync('D:/local/Temp/settings.json')).paths.pim + `api/etl_queue/activities/${dataparams.hdl}`;
             let options = {
                 url: urls,
                 body: dataparams,
-                headers: { Authorization: 'Bearer ' + authResponse.access_token },
+                headers: { Authorization: 'Bearer ' + access_token },
                 json: true,
                 resolveWithFullResponse: true
             };
@@ -118,7 +118,17 @@ const updateFinal = function(fileHDL) {
         // code goes here
         // return updateFinalObj(timeline)
         return new Promise((resolve, reject) => {
-            resolve({ "response": "hey" })
+            // resolve({ "response": "hey" })
+
+            authPim().then((authResponse) => {
+                updateFinalObj(authResponse.access_token)
+                    .then((response) => {
+                        resolve({ "response": response });
+                    }).catch((err) => {
+                        resolve({ "response": err })
+                    })
+            });
+
             // authPim().then((authResponse) => {
             //     updateFinalObj(authResponse).then((rr) => {
             //         resolve({ "response": rr });
