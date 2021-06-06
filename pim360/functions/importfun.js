@@ -131,7 +131,7 @@ const updateFinal = function(fileHDL) {
                 json: true,
                 // resolveWithFullResponse: true
             };
-            // return reqprom.post(options);
+            return reqprom.post(options);
             return url
         }
         // code goes here
@@ -139,13 +139,39 @@ const updateFinal = function(fileHDL) {
         return new Promise((resolve, reject) => {
             // resolve({ "response": ""+fileHDL+"" })
 
-            authPim().then((authResponse) => {                
-                updateFinalObj(authResponse.access_token)
-                    .then((response) => {
-                        resolve({ "response": response });
-                    }).catch((err) => {
-                        resolve({ "response": err })
-                    })
+            authPim().then((authResponse) => {         
+                let dataparams = {
+                    "hdl": "rUEu8OeLQim0FYzX79DAHA",
+                    "status": "PENDING",
+                    "params": {
+                        "eic_handle": "wuKBT1VrTEeLI38LeDHkFQ",
+                        "manifest_name": "",
+                        "inputfile": ""+fileHDL+"",
+                        "worksheets": "",
+                        "object_type": "TAGGED_ITEM",
+                        "deliverable": "tcRWpiZPTy6YVtFAY0MPZg",
+                        "source_handle": "DenqzV2OS5We7bV_gpvNDQ",
+                        "classification": "cls",
+                        "ens_name": "Standard ENS",
+                        "terminate_attributes": "ignore"
+                    }
+                };
+                let url = JSON.parse(fs.readFileSync('D:/local/Temp/settings.json')).paths.pim + `api/etl_queue/activities/${dataparams.hdl}`;
+                let options = {
+                    url: urls,
+                    body: dataparams,
+                    headers: { Authorization: 'Bearer ' + authResponse.access_token },
+                    json: true,
+                    // resolveWithFullResponse: true
+                };
+                let res = reqprom.post(options);       
+                resolve({"response": res});
+                // updateFinalObj(authResponse.access_token)
+                //     .then((response) => {
+                //         resolve({ "response": response });
+                //     }).catch((err) => {
+                //         resolve({ "response": err })
+                //     })
             });
 
             // authPim().then((authResponse) => {
