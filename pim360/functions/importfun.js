@@ -6,7 +6,7 @@ var json2xls = require('json2xls');
 const pimApis = require("../api/api-pim360");
 const fs = require('fs');
 
-const dataparams = {
+let dataparams = {
     "hdl": "rUEu8OeLQim0FYzX79DAHA",
     "status": "PENDING",
     "params": {
@@ -102,6 +102,7 @@ const download = function(file, some) {
 
 const updateFinal = function(fileHDL) {
     try {
+        
         dataparams.params.inputfile = fileHDL;
 
         function updateFinalObj(authResponse) {
