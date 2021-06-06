@@ -157,15 +157,15 @@ const updateFinal = function(fileHDL) {
                     }
                 };
                 let url = JSON.parse(fs.readFileSync('D:/local/Temp/settings.json')).paths.pim + `api/etl_queue/activities/${dataparams.hdl}`;
-                // let options = {
-                //     url: urls,
-                //     body: dataparams,
-                //     headers: { Authorization: 'Bearer ' + authResponse.access_token },
-                //     json: true,
-                //     // resolveWithFullResponse: true
-                // };
+                let options = {
+                    url: urls,
+                    body: dataparams,
+                    headers: { Authorization: 'Bearer ' + authResponse.access_token },
+                    json: true,
+                    // resolveWithFullResponse: true
+                };
                 // let res = reqprom.post(options);       
-                resolve({"response": url});
+                resolve({"response": options});
                 // updateFinalObj(authResponse.access_token)
                 //     .then((response) => {
                 //         resolve({ "response": response });
