@@ -136,16 +136,17 @@ const updateFinal = function(fileHDL) {
         // code goes here
         // return updateFinalObj(timeline)
         return new Promise((resolve, reject) => {
-            resolve({ "response": ""+fileHDL+"" })
+            // resolve({ "response": ""+fileHDL+"" })
 
-            // authPim().then((authResponse) => {
-            //     updateFinalObj(authResponse.access_token)
-            //         .then((response) => {
-            //             resolve({ "response": response });
-            //         }).catch((err) => {
-            //             resolve({ "response": err })
-            //         })
-            // });
+            authPim().then((authResponse) => {
+                resolve({ "response": authResponse })
+                // updateFinalObj(authResponse.access_token)
+                //     .then((response) => {
+                //         resolve({ "response": response });
+                //     }).catch((err) => {
+                //         resolve({ "response": err })
+                //     })
+            });
 
             // authPim().then((authResponse) => {
             //     updateFinalObj(authResponse).then((rr) => {
