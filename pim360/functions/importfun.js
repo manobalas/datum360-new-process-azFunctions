@@ -9,7 +9,7 @@ const fs = require('fs');
 const allUsers = [{
     "TAG NUMBER": "01-CV-1001",
     "ASSET": "TKF",
-    "ASSET": "CONTROL VALVE",
+    "CLASS NAME": "CONTROL VALVE",
     "DESCRIPTION": "something new from api"
 }];
 
