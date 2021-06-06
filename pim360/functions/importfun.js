@@ -7,9 +7,6 @@ const pimApis = require("../api/api-pim360");
 const fs = require('fs');
 
 const allUsers = [{
-    "TAG NUMBER": "01-CV-1001",
-    "ASSET": "TKF",
-    "ASSET": "CONTROL VALVE",
     "DESCRIPTION": "something new from api"
 }];
 
