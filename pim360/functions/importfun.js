@@ -131,7 +131,8 @@ const updateFinal = function(fileHDL) {
                 json: true,
                 resolveWithFullResponse: true
             };
-            return reqprom.post(options);
+            // return reqprom.post(options);
+            return url
         }
         // code goes here
         // return updateFinalObj(timeline)
@@ -139,13 +140,12 @@ const updateFinal = function(fileHDL) {
             // resolve({ "response": ""+fileHDL+"" })
 
             authPim().then((authResponse) => {                
-                
-                resolve({ "response": updateFinalObj(authResponse.access_token) })
-                //     .then((response) => {
-                //         resolve({ "response": response });
-                //     }).catch((err) => {
-                //         resolve({ "response": err })
-                //     })
+                updateFinalObj(authResponse.access_token)
+                    .then((response) => {
+                        resolve({ "response": response });
+                    }).catch((err) => {
+                        resolve({ "response": err })
+                    })
             });
 
             // authPim().then((authResponse) => {
