@@ -6,23 +6,6 @@ var json2xls = require('json2xls');
 const pimApis = require("../api/api-pim360");
 const fs = require('fs');
 
-let dataparams = {
-    "hdl": "rUEu8OeLQim0FYzX79DAHA",
-    "status": "PENDING",
-    "params": {
-        "eic_handle": "4rJOtL9ESTu83fGyz7hAGA",
-        "manifest_name": "",
-        "inputfile": "",
-        "worksheets": "",
-        "object_type": "TAGGED_ITEM",
-        "deliverable": "",
-        "source_handle": "",
-        "classification": "cls",
-        "ens_name": "",
-        "terminate_attributes": "ignore"
-    }
-};
-
 const allUsers = [{
     "TAG NUMBER": "MCC-01-LG-10021",
     "ASSET": "MCCs",
@@ -103,7 +86,23 @@ const download = function(file, some) {
 const updateFinal = function(fileHDL) {
     try {
 
-        dataparams.params.inputfile = fileHDL;
+        let dataparams = {
+            "hdl": "rUEu8OeLQim0FYzX79DAHA",
+            "status": "PENDING",
+            "params": {
+                "eic_handle": "4rJOtL9ESTu83fGyz7hAGA",
+                "manifest_name": "",
+                "inputfile": fileHDL,
+                "worksheets": "",
+                "object_type": "TAGGED_ITEM",
+                "deliverable": "",
+                "source_handle": "",
+                "classification": "cls",
+                "ens_name": "",
+                "terminate_attributes": "ignore"
+            }
+        };
+        // dataparams.params.inputfile = fileHDL;
 
         function updateFinalObj(authResponse) {
             let url = JSON.parse(fs.readFileSync('D:/local/Temp/settings.json')).paths.pim + `api/etl_queue/activities/${dataparams.hdl}`;

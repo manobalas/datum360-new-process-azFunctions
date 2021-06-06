@@ -39,7 +39,7 @@ module.exports = async function (context, req) {
     // some
     const EIC = (req.query.EIC) == undefined ? '' : (req.query.EIC);
     const register_view_name = (req.query.register_view_name);
-    const fileHDL = (req.query.fileHDL);
+    const fileHDL = (req.query.file_hdl);
 
     // example
     const filebody = (req.body && req.body.file);
@@ -87,7 +87,7 @@ module.exports = async function (context, req) {
             result = await importfun.download_new(filebody, req)
             break;
         case "update":
-            result = await importfun.update(fileHDL, req)
+            result = await importfun.update(fileHDL)
             break;
 
         default:
