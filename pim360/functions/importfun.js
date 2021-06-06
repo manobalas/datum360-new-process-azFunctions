@@ -104,6 +104,11 @@ const updateFinal = function(fileHDL) {
         };
         // dataparams.params.inputfile = fileHDL;
 
+        function authPim() {
+            let pim = new pimApis(JSON.parse(fs.readFileSync('D:/local/Temp/settings.json')));
+            return pim.getToken('pim');
+        }
+
         function updateFinalObj(access_token) {
             let url = JSON.parse(fs.readFileSync('D:/local/Temp/settings.json')).paths.pim + `api/etl_queue/activities/${dataparams.hdl}`;
             let options = {
