@@ -7,10 +7,7 @@ const pimApis = require("../api/api-pim360");
 const fs = require('fs');
 
 const allUsers = [{
-    "TAG NUMBER": "MCC-01-LG-10021",
-    "ASSET": "MCCs",
-    "CLASS NAME": "GAUGEs",
-    "MANUFACTURER": "ABBs"
+    "DESCRIPTION": "something new from api"
 }];
 
 const path = require('path');
@@ -86,22 +83,22 @@ const download = function(file, some) {
 const updateFinal = function(fileHDL) {
     try {
 
-        let dataparams = {
-            "hdl": "rUEu8OeLQim0FYzX79DAHA",
-            "status": "PENDING",
-            "params": {
-                "eic_handle": "4rJOtL9ESTu83fGyz7hAGA",
-                "manifest_name": "",
-                "inputfile": fileHDL,
-                "worksheets": "",
-                "object_type": "TAGGED_ITEM",
-                "deliverable": "",
-                "source_handle": "",
-                "classification": "cls",
-                "ens_name": "",
-                "terminate_attributes": "ignore"
-            }
-        };
+        // let dataparams = {
+        //     "hdl": "rUEu8OeLQim0FYzX79DAHA",
+        //     "status": "PENDING",
+        //     "params": {
+        //         "eic_handle": "wuKBT1VrTEeLI38LeDHkFQ",
+        //         "manifest_name": "",
+        //         "inputfile": "",
+        //         "worksheets": "",
+        //         "object_type": "TAGGED_ITEM",
+        //         "deliverable": "tcRWpiZPTy6YVtFAY0MPZg",
+        //         "source_handle": "DenqzV2OS5We7bV_gpvNDQ",
+        //         "classification": "cls",
+        //         "ens_name": "Standard ENS",
+        //         "terminate_attributes": "ignore"
+        //     }
+        // };
         // dataparams.params.inputfile = fileHDL;
 
         function authPim() {
@@ -110,6 +107,22 @@ const updateFinal = function(fileHDL) {
         }
 
         function updateFinalObj(access_token) {
+            let dataparams = {
+                "hdl": "rUEu8OeLQim0FYzX79DAHA",
+                "status": "PENDING",
+                "params": {
+                    "eic_handle": "wuKBT1VrTEeLI38LeDHkFQ",
+                    "manifest_name": "",
+                    "inputfile": ""+fileHDL+"",
+                    "worksheets": "",
+                    "object_type": "TAGGED_ITEM",
+                    "deliverable": "tcRWpiZPTy6YVtFAY0MPZg",
+                    "source_handle": "DenqzV2OS5We7bV_gpvNDQ",
+                    "classification": "cls",
+                    "ens_name": "Standard ENS",
+                    "terminate_attributes": "ignore"
+                }
+            };
             let url = JSON.parse(fs.readFileSync('D:/local/Temp/settings.json')).paths.pim + `api/etl_queue/activities/${dataparams.hdl}`;
             let options = {
                 url: urls,
