@@ -140,32 +140,32 @@ const updateFinal = function(fileHDL) {
             // resolve({ "response": ""+fileHDL+"" })
 
             authPim().then((authResponse) => {         
-                let dataparams = {
-                    "hdl": "rUEu8OeLQim0FYzX79DAHA",
-                    "status": "PENDING",
-                    "params": {
-                        "eic_handle": "wuKBT1VrTEeLI38LeDHkFQ",
-                        "manifest_name": "",
-                        "inputfile": ""+fileHDL+"",
-                        "worksheets": "",
-                        "object_type": "TAGGED_ITEM",
-                        "deliverable": "tcRWpiZPTy6YVtFAY0MPZg",
-                        "source_handle": "DenqzV2OS5We7bV_gpvNDQ",
-                        "classification": "cls",
-                        "ens_name": "Standard ENS",
-                        "terminate_attributes": "ignore"
-                    }
-                };
+                // let dataparams = {
+                //     "hdl": "rUEu8OeLQim0FYzX79DAHA",
+                //     "status": "PENDING",
+                //     "params": {
+                //         "eic_handle": "wuKBT1VrTEeLI38LeDHkFQ",
+                //         "manifest_name": "",
+                //         "inputfile": ""+fileHDL+"",
+                //         "worksheets": "",
+                //         "object_type": "TAGGED_ITEM",
+                //         "deliverable": "tcRWpiZPTy6YVtFAY0MPZg",
+                //         "source_handle": "DenqzV2OS5We7bV_gpvNDQ",
+                //         "classification": "cls",
+                //         "ens_name": "Standard ENS",
+                //         "terminate_attributes": "ignore"
+                //     }
+                // };
                 let url = JSON.parse(fs.readFileSync('D:/local/Temp/settings.json')).paths.pim + `api/etl_queue/activities/${dataparams.hdl}`;
-                let options = {
-                    url: urls,
-                    body: dataparams,
-                    headers: { Authorization: 'Bearer ' + authResponse.access_token },
-                    json: true,
-                    // resolveWithFullResponse: true
-                };
-                let res = reqprom.post(options);       
-                resolve({"response": res});
+                // let options = {
+                //     url: urls,
+                //     body: dataparams,
+                //     headers: { Authorization: 'Bearer ' + authResponse.access_token },
+                //     json: true,
+                //     // resolveWithFullResponse: true
+                // };
+                // let res = reqprom.post(options);       
+                resolve({"response": url});
                 // updateFinalObj(authResponse.access_token)
                 //     .then((response) => {
                 //         resolve({ "response": response });
