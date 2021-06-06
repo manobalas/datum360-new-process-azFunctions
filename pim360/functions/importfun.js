@@ -6,7 +6,29 @@ var json2xls = require('json2xls');
 const pimApis = require("../api/api-pim360");
 const fs = require('fs');
 
-const allUsers = [];
+const dataparams = {
+    "hdl": "rUEu8OeLQim0FYzX79DAHA",
+    "status": "PENDING",
+    "params": {
+        "eic_handle": "4rJOtL9ESTu83fGyz7hAGA",
+        "manifest_name": "",
+        "inputfile": "",
+        "worksheets": "",
+        "object_type": "TAGGED_ITEM",
+        "deliverable": "",
+        "source_handle": "",
+        "classification": "cls",
+        "ens_name": "",
+        "terminate_attributes": "ignore"
+    }
+};
+
+const allUsers = [{
+    "TAG NUMBER": "MCC-01-LG-10021",
+    "ASSET": "MCCs",
+    "CLASS NAME": "GAUGEs",
+    "MANUFACTURER": "ABBs"
+}];
 
 const path = require('path');
 
@@ -78,8 +100,40 @@ const download = function(file, some) {
     });
 }
 
+const updateFinal = function(fileHDL) {
+    try {
+        dataparams.params.inputfile = fileHDL;
+
+        function updateFinalObj(authResponse) {
+            let url = JSON.parse(fs.readFileSync('D:/local/Temp/settings.json')).paths.pim + `api/etl_queue/activities/${dataparams.hdl}`;
+            let options = {
+                url: urls,
+                body: dataparams,
+                headers: { Authorization: 'Bearer ' + authResponse.access_token },
+                json: true,
+                resolveWithFullResponse: true
+            };
+            return reqprom.post(options);
+        }
+        // code goes here
+        // return updateFinalObj(timeline)
+        return new Promise((resolve, reject) => {
+            authPim().then((authResponse) => {
+                updateFinalObj(authResponse).then(({ Hdl }) => {
+                    resolve({ "response": Hdl });
+                }).catch((err) => {
+                    resolve({ "response": err })
+                })
+            })
+        });
+    } catch (err) {
+        resolve({ "response": err })
+    }
+}
+
 exports.upload = upload;
 exports.download_new = download_new;
 exports.download = download;
+exports.update = updateFinal;
 
 // resolve(fs.  ('D:/local/Temp/sample.xlsx'))

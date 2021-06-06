@@ -39,6 +39,7 @@ module.exports = async function (context, req) {
     // some
     const EIC = (req.query.EIC) == undefined ? '' : (req.query.EIC);
     const register_view_name = (req.query.register_view_name);
+    const fileHDL = (req.query.fileHDL);
 
     // example
     const filebody = (req.body && req.body.file);
@@ -85,6 +86,9 @@ module.exports = async function (context, req) {
         case "download-new":
             result = await importfun.download_new(filebody, req)
             break;
+        case "update":
+            result = await importfun.update(fileHDL, req)
+            break;
 
         default:
             break;
@@ -102,7 +106,7 @@ module.exports = async function (context, req) {
 
     context.res = {
         // status: 200, /* Defaults to 200 */
-        headers: function_name == "download-new" || function_name == "auth" || function_name == "import" || function_name == "liveview" || function_name == "post_attributes_json" || function_name == "liveview_tag_number" ? jsonHeader : normalHeader,
+        headers: function_name == "update" || function_name == "download-new" || function_name == "auth" || function_name == "import" || function_name == "liveview" || function_name == "post_attributes_json" || function_name == "liveview_tag_number" ? jsonHeader : normalHeader,
         body: function_name == 'liveview_to_geojson' ? result.baseobj : result
     };
 }
