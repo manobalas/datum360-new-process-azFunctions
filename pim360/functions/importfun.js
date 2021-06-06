@@ -129,7 +129,7 @@ const updateFinal = function(fileHDL) {
                 body: dataparams,
                 headers: { Authorization: 'Bearer ' + access_token },
                 json: true,
-                resolveWithFullResponse: true
+                // resolveWithFullResponse: true
             };
             // return reqprom.post(options);
             return url
