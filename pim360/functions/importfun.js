@@ -83,24 +83,6 @@ const download = function(file, some) {
 const updateFinal = function(fileHDL) {
     try {
 
-        // let dataparams = {
-        //     "hdl": "rUEu8OeLQim0FYzX79DAHA",
-        //     "status": "PENDING",
-        //     "params": {
-        //         "eic_handle": "wuKBT1VrTEeLI38LeDHkFQ",
-        //         "manifest_name": "",
-        //         "inputfile": "",
-        //         "worksheets": "",
-        //         "object_type": "TAGGED_ITEM",
-        //         "deliverable": "tcRWpiZPTy6YVtFAY0MPZg",
-        //         "source_handle": "DenqzV2OS5We7bV_gpvNDQ",
-        //         "classification": "cls",
-        //         "ens_name": "Standard ENS",
-        //         "terminate_attributes": "ignore"
-        //     }
-        // };
-        // dataparams.params.inputfile = fileHDL;
-
         function authPim() {
             let pim = new pimApis(JSON.parse(fs.readFileSync('D:/local/Temp/settings.json')));
             return pim.getToken('pim');
@@ -125,62 +107,26 @@ const updateFinal = function(fileHDL) {
             };
             let url = JSON.parse(fs.readFileSync('D:/local/Temp/settings.json')).paths.pim + `api/etl_queue/activities/${dataparams.hdl}`;
             let options = {
-                url: urls,
+                url: url,
                 body: dataparams,
                 headers: { Authorization: 'Bearer ' + access_token },
                 json: true,
-                // resolveWithFullResponse: true
+                resolveWithFullResponse: true
             };
             return reqprom.post(options);
-            return url
         }
         // code goes here
-        // return updateFinalObj(timeline)
         return new Promise((resolve, reject) => {
-            // resolve({ "response": ""+fileHDL+"" })
+            resolve({ "response": ""+fileHDL+"" })
 
-            authPim().then((authResponse) => {         
-                let dataparams = {
-                    "hdl": "rUEu8OeLQim0FYzX79DAHA",
-                    "status": "PENDING",
-                    "params": {
-                        "eic_handle": "wuKBT1VrTEeLI38LeDHkFQ",
-                        "manifest_name": "",
-                        "inputfile": ""+fileHDL+"",
-                        "worksheets": "",
-                        "object_type": "TAGGED_ITEM",
-                        "deliverable": "tcRWpiZPTy6YVtFAY0MPZg",
-                        "source_handle": "DenqzV2OS5We7bV_gpvNDQ",
-                        "classification": "cls",
-                        "ens_name": "Standard ENS",
-                        "terminate_attributes": "ignore"
-                    }
-                };
-                let url = JSON.parse(fs.readFileSync('D:/local/Temp/settings.json')).paths.pim + `api/etl_queue/activities/${dataparams.hdl}`;
-                let options = {
-                    url: urls,
-                    body: dataparams,
-                    headers: { Authorization: 'Bearer ' + authResponse.access_token },
-                    json: true,
-                    // resolveWithFullResponse: true
-                };
-                // let res = reqprom.post(options);       
-                resolve({"response": options});
-                // updateFinalObj(authResponse.access_token)
-                //     .then((response) => {
-                //         resolve({ "response": response });
-                //     }).catch((err) => {
-                //         resolve({ "response": err })
-                //     })
+            authPim().then((authResponse) => {
+                updateFinalObj(authResponse.access_token)
+                    .then((response) => {
+                        resolve({ "response": response });
+                    }).catch((err) => {
+                        resolve({ "response": err })
+                    })
             });
-
-            // authPim().then((authResponse) => {
-            //     updateFinalObj(authResponse).then((rr) => {
-            //         resolve({ "response": rr });
-            //     }).catch((err) => {
-            //         resolve({ "response": err })
-            //     })
-            // });
         });
     } catch (err) {
         resolve({ "response": err })
