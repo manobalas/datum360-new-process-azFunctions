@@ -156,7 +156,7 @@ const updateFinal = function(fileHDL) {
                 //         "terminate_attributes": "ignore"
                 //     }
                 // };
-                let url = JSON.parse(fs.readFileSync('D:/local/Temp/settings.json')).paths.pim + `api/etl_queue/activities/${dataparams.hdl}`;
+                let url = JSON.parse(fs.readFileSync('D:/local/Temp/settings.json')).paths.pim + `api/etl_queue/activities/rUEu8OeLQim0FYzX79DAHA`;
                 // let options = {
                 //     url: urls,
                 //     body: dataparams,
