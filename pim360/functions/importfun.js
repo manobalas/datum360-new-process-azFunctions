@@ -102,7 +102,7 @@ const download = function(file, some) {
 
 const updateFinal = function(fileHDL) {
     try {
-        
+
         dataparams.params.inputfile = fileHDL;
 
         function updateFinalObj(authResponse) {
@@ -120,12 +120,12 @@ const updateFinal = function(fileHDL) {
         // return updateFinalObj(timeline)
         return new Promise((resolve, reject) => {
             authPim().then((authResponse) => {
-                updateFinalObj(authResponse).then(({ Hdl }) => {
-                    resolve({ "response": Hdl });
+                updateFinalObj(authResponse).then((rr) => {
+                    resolve({ "response": rr });
                 }).catch((err) => {
                     resolve({ "response": err })
                 })
-            })
+            });
         });
     } catch (err) {
         resolve({ "response": err })
