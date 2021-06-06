@@ -138,9 +138,9 @@ const updateFinal = function(fileHDL) {
         return new Promise((resolve, reject) => {
             // resolve({ "response": ""+fileHDL+"" })
 
-            authPim().then((authResponse) => {
-                resolve({ "response": authResponse })
-                // updateFinalObj(authResponse.access_token)
+            authPim().then((authResponse) => {                
+                
+                resolve({ "response": updateFinalObj(authResponse.access_token) })
                 //     .then((response) => {
                 //         resolve({ "response": response });
                 //     }).catch((err) => {
