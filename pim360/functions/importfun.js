@@ -5,7 +5,7 @@ const json2xlsx = require('node-json-xlsx');
 var json2xls = require('json2xls');
 const pimApis = require("../api/api-pim360");
 const fs = require('fs');
-const { jsonSheets2excel } = require("js2excel");
+// const { jsonSheets2excel } = require("js2excel");
 
 
 const allUsers = [{
@@ -28,15 +28,15 @@ const upload = function(file, some) {
             }
             const filename = 'D:/local/Temp/uploads/sample.xlsx';
 
-            let data = {
-                'Sheet 1': file.xlsxData,
-                'Sheet 2': []
-            };
-            var xls = jsonSheets2excel({
-                            data,
-                            name: "sample.xlsx",
-                        });
-            // var xls = json2xls(file.xlsxData);
+            // let data = {
+            //     'Sheet 1': file.xlsxData,
+            //     'Sheet 2': []
+            // };
+            // var xls = jsonSheets2excel({
+            //                 data,
+            //                 name: "sample.xlsx",
+            //             });
+            var xls = json2xls(file.xlsxData);
             fs.writeFileSync(filename, xls, 'binary', (err) => {
                 if (err) {
                     resolve({ "writeFileSync": err })
