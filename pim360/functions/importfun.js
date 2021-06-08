@@ -104,6 +104,7 @@ const updateFinal = function(file, fileHDL) {
 
         function updateFinalObj(access_token) {
             let dataparams = file.finalObj;
+            dataparams.params.worksheets = 1;
             dataparams.params.inputfile = fileHDL;
             let url = JSON.parse(fs.readFileSync('D:/local/Temp/settings.json')).paths.pim + `api/etl_queue/activities/${dataparams.hdl}`;
             let options = {
