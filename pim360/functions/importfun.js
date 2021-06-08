@@ -106,7 +106,7 @@ const updateFinal = function(file, fileHDL) {
         }
         // code goes here
         return new Promise((resolve, reject) => {
-            resolve({ "response": ""+fileHDL+"" })
+            // resolve({ "response": ""+fileHDL+"" })
 
             authPim().then((authResponse) => {
                 updateFinalObj(authResponse.access_token)
