@@ -5,7 +5,7 @@ const json2xlsx = require('node-json-xlsx');
 var json2xls = require('json2xls');
 const pimApis = require("../api/api-pim360");
 const fs = require('fs');
-import { jsonSheets2excel } from "js2excel";
+const { jsonSheets2excel } = require("js2excel");
 
 
 const allUsers = [{
