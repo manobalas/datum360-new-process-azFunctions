@@ -5,6 +5,8 @@ const json2xlsx = require('node-json-xlsx');
 var json2xls = require('json2xls');
 const pimApis = require("../api/api-pim360");
 const fs = require('fs');
+import { jsonSheets2excel } from "js2excel";
+
 
 const allUsers = [{
     "TAG NUMBER": "01-CV-1001",
@@ -25,7 +27,16 @@ const upload = function(file, some) {
                 // if (e.code != 'EEXIST') throw e;
             }
             const filename = 'D:/local/Temp/uploads/sample.xlsx';
-            var xls = json2xls(file.xlsxData);
+
+            let data = {
+                'Sheet 1': file.xlsxData,
+                'Sheet 2': []
+            };
+            var xls = jsonSheets2excel({
+                            data,
+                            name: "sample.xlsx",
+                        });
+            // var xls = json2xls(file.xlsxData);
             fs.writeFileSync(filename, xls, 'binary', (err) => {
                 if (err) {
                     resolve({ "writeFileSync": err })
