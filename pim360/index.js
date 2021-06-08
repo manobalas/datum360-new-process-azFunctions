@@ -42,7 +42,7 @@ module.exports = async function (context, req) {
     const fileHDL = (req.query.file_hdl);
 
     // example
-    const filebody = (req.body && req.body.file);
+    const filebody = (req.body);
     const some = (req.body && req.body.some);
 
     const function_name = (req.query.function_name || "attributes");
@@ -87,7 +87,7 @@ module.exports = async function (context, req) {
             result = await importfun.download_new(filebody, req)
             break;
         case "update":
-            result = await importfun.update(fileHDL)
+            result = await importfun.update(filebody, fileHDL)
             break;
 
         default:
