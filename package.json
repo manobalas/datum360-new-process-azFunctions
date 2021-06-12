@@ -15,7 +15,8 @@
     "path": "^0.12.7",
     "request": "^2.88.2",
     "request-promise": "^4.2.6",
-    "js2excel": "^1.0.1"
+    "js2excel": "^1.0.1",
+    "xlsx": "^0.17.0"
   },
   "devDependencies": {}
 }

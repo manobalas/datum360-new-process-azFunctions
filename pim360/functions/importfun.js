@@ -5,6 +5,7 @@ const json2xlsx = require('node-json-xlsx');
 var json2xls = require('json2xls');
 const pimApis = require("../api/api-pim360");
 const fs = require('fs');
+var XLSX = require('xlsx');
 // const { jsonSheets2excel } = require("js2excel");
 
 
@@ -23,26 +24,28 @@ const upload = function(file, some) {
             var dir = 'D:/local/Temp/uploads';
             try {
                 fs.mkdirSync(dir);
-            } catch (e) {
-                // if (e.code != 'EEXIST') throw e;
-            }
+            } catch (e) {}
             const filename = 'D:/local/Temp/uploads/sample.xlsx';
 
-            // let data = {
-            //     'Sheet 1': file.xlsxData,
-            //     'Sheet 2': []
-            // };
-            // var xls = jsonSheets2excel({
-            //                 data,
-            //                 name: "sample.xlsx",
-            //             });
-            var xls = json2xls(file.xlsxData);
-            fs.writeFileSync(filename, xls, 'binary', (err) => {
-                if (err) {
-                    resolve({ "writeFileSync": err })
-                }
-                resolve({ "writeFileSync": "file is saved" })
-            });
+            let Datas = {
+                'sheeta': file.xlsxData,
+                'sheetb': []
+            }
+
+            var sheetaWS = XLSX.utils.json_to_sheet(Datas.sheeta);
+            var sheetbWS = XLSX.utils.json_to_sheet(Datas.sheetb);
+            var wb = XLSX.utils.book_new();
+            XLSX.utils.book_append_sheet(wb, sheetaWS, 'sheeta');
+            XLSX.utils.book_append_sheet(wb, sheetbWS, 'sheetb');
+            XLSX.writeFile(wb, filename);
+
+            // var xls = json2xls(file.xlsxData);
+            // fs.writeFileSync(filename, xls, 'binary', (err) => {
+            //     if (err) {
+            //         resolve({ "writeFileSync": err })
+            //     }
+            //     resolve({ "writeFileSync": "file is saved" })
+            // });
             resolve({ "writeFileSync": "file is saved" })
         } catch (err) {
             resolve({ "response": JSON.stringify(err) })
